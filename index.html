@@ -5,18 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>Badminton Ladder Game System</title>
 
-<!-- PWA -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0F6E56" id="theme-color-meta">
 <meta name="color-scheme" content="light">
 
-<!-- iOS standalone (Add to Home Screen) -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Ladder">
 
-<!-- Icons -->
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
@@ -1243,6 +1240,56 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
 .rmp-item.warn:hover{background:var(--warn-soft)}
 .rmp-separator{height:1px;background:var(--line);margin:3px 0}
 
+/* ── GRANT RESTORATION MODAL ── */
+.grm-player-card{
+  display:flex;align-items:center;gap:14px;
+  background:var(--soft);
+  border:1px solid var(--line-2);
+  border-radius:var(--r-md);
+  padding:14px;
+  margin-bottom:18px;
+}
+.grm-avatar{
+  width:44px;height:44px;
+  border-radius:var(--r-sm);
+  background:linear-gradient(135deg,#7a6218,#b89030);
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.grm-avatar svg{ stroke:#fff; }
+.grm-card-title{
+  font-size:14px;font-weight:600;color:var(--ink);
+  line-height:1.3;margin-bottom:3px;
+}
+.grm-card-sub{font-size:12px;color:var(--ink-2);}
+.grm-field-label{
+  font-size:10px;font-weight:600;
+  letter-spacing:0.07em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:8px;
+}
+.grm-select{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid var(--line-2);
+  border-radius:var(--r-md);
+  font-size:13px;
+  background:var(--surface);
+  color:var(--ink);
+  outline:none;
+  margin-bottom:18px;
+  cursor:pointer;
+  font-family:inherit;
+  appearance:auto;
+}
+.grm-select:focus{ border-color:var(--perf); }
+.grm-divider{ height:1px;background:var(--line);margin:0 -24px 18px; }
+.grm-grant-btn{
+  background:#2a7d4f !important;
+  color:#fff !important;
+}
+.grm-grant-btn:hover:not(:disabled){ background:#1e6040 !important; }
+.grm-grant-btn:disabled{ opacity:.4;cursor:not-allowed; }
+
 /* ── MODERN TIME INPUTS ── */
 .time-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .tf-label{font-size:10px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px}
@@ -1856,7 +1903,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
 </head>
 <body>
 
-<!-- iOS install hint, shown only in Safari before Add-to-Home-Screen -->
 <div class="install-hint" id="install-hint" role="dialog" aria-label="Install instructions">
   <div class="ih-text">
     <strong>Install this app</strong>
@@ -1867,7 +1913,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
   <button class="ih-dismiss" id="ih-dismiss-btn">Got it</button>
 </div>
 
-<!-- ====== NAV ====== -->
 <div class="nav" id="nav">
   <div class="nav-left">
     <div class="nav-logo" id="nav-logo">
@@ -1894,7 +1939,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
   </div>
 </div>
 
-<!-- ====== HOME ====== -->
 <div class="screen active" id="screen-home">
   <div class="home-wrap">
     <div class="home-eyebrow" id="home-eyebrow-txt">Welcome back</div>
@@ -1932,7 +1976,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
     <div class="home-section">
       <div class="home-section-title">Groups</div>
       <div class="group-cards">
-        <!-- PERFORMANCE -->
         <div class="group-card" id="group-card-perf">
           <div class="gc-head">
             <div class="gc-icon">
@@ -1955,7 +1998,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
             <button class="gc-btn" onclick="openHistory('perf')">Match History</button>
           </div>
         </div>
-        <!-- JUNIOR ADVANCE -->
         <div class="group-card jun" id="group-card-jun">
           <div class="gc-head">
             <div class="gc-icon">
@@ -2000,7 +2042,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
   </div>
 </div>
 
-<!-- ====== CHECK-IN ====== -->
 <div class="screen" id="screen-checkin">
   <div class="checkin-wrap">
     <div class="ci-head">
@@ -2030,7 +2071,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
   </div>
 </div>
 
-<!-- ====== LADDER ====== -->
 <div class="screen" id="screen-ladder">
   <div class="ladder-wrap">
     <div class="stats-bar">
@@ -2086,7 +2126,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
   </div>
 </div>
 
-<!-- ====== RESULTS ====== -->
 <div class="screen" id="screen-results">
   <div class="results-wrap">
     <div class="results-main">
@@ -2130,7 +2169,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
   </div>
 </div>
 
-<!-- ====== MATCH HISTORY ====== -->
 <div class="screen" id="screen-history">
   <div class="history-wrap">
     <div class="history-head">
@@ -2147,7 +2185,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
   </div>
 </div>
 
-<!-- ====== MODALS ====== -->
 <div class="overlay" id="chalModal">
   <div class="modal" style="position:relative">
     <div class="modal-title" id="cm-title">Challenge</div>
@@ -2269,7 +2306,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
   </div>
 </div>
 
-<!-- ====== PLAYERS SCREEN ====== -->
 <div class="screen" id="screen-players">
   <div class="players-wrap">
     <div class="players-head">
@@ -2299,7 +2335,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
   </div>
 </div>
 
-<!-- Manual archive import modal -->
 <div class="overlay" id="manualArchiveModal">
   <div class="modal wide" style="max-width:500px">
     <div class="modal-title">Add manual archive</div>
@@ -2335,13 +2370,11 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
         onfocus="this.style.borderColor='var(--perf)'" onblur="this.style.borderColor=''">
     </div>
 
-    <!-- Two-tab interface: Select → Order -->
     <div class="ma-tab" id="ma-tab-bar">
       <button class="ma-tab-btn active" id="ma-tab-select" onclick="maSwitchTab('select')"><span class="ma-step-num">1</span> Select players</button>
       <button class="ma-tab-btn" id="ma-tab-order" onclick="maSwitchTab('order')"><span class="ma-step-num">2</span> Set ranking order</button>
     </div>
 
-    <!-- Tab 1: Checkbox player list -->
     <div id="ma-panel-select">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
         <span style="font-size:11px;color:var(--ink-3)">Check all players who attended this session</span>
@@ -2351,7 +2384,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
       <button class="btn ghost" style="margin-top:8px" onclick="closeModal('manualArchiveModal')">Cancel</button>
     </div>
 
-    <!-- Tab 2: Draggable ranked list -->
     <div id="ma-panel-order" class="hidden">
       <div style="font-size:11px;color:var(--ink-3);margin-bottom:8px">Drag the <strong>⠿</strong> handle to reorder players into the correct final standing.</div>
       <div class="ma-ranked-list" id="ma-ranked-list"></div>
@@ -2363,7 +2395,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
   </div>
 </div>
 
-<!-- Protected Rank Restoration admin modal (dedicated, polished) -->
 <div class="overlay" id="restoModal">
   <div class="modal rsto-modal">
     <div class="rsto-header">
@@ -2404,7 +2435,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
         <div class="ppm-name" id="ppm-name"></div>
         <div class="ppm-sub" id="ppm-sub"></div>
       </div>
-      <!-- Header actions: rendered dynamically by _renderPlayerProfile -->
       <div id="ppm-header-actions"></div>
     </div>
     <div class="ppm-body">
@@ -2414,7 +2444,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
     </div>
   </div>
 </div>
-<!-- Rules FAB (check-in + ladder phases only) -->
 <div class="rules-fab" id="rules-fab">
   <button class="rules-fab-btn" onclick="openRulesModal()">
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -2422,7 +2451,6 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
   </button>
 </div>
 
-<!-- Rules modal -->
 <div class="overlay" id="rulesModal">
   <div class="modal rules-modal">
     <div class="rules-modal-header">
@@ -2439,6 +2467,40 @@ body.is-dragging, body.is-dragging *{cursor:grabbing !important}
   <div class="floating-lang-pill">
     <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
     <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中</button>
+  </div>
+</div>
+
+<div class="overlay" id="grantRestorationModal">
+  <div class="modal">
+    <div class="grm-player-card">
+      <div class="grm-avatar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+        </svg>
+      </div>
+      <div>
+        <div class="grm-card-title">Grant protected rank restoration</div>
+        <div class="grm-card-sub">
+          <span id="grm-player-name"></span>
+          <span style="color:var(--ink-3)"> · </span>
+          <span id="grm-player-former">former protected rank</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grm-field-label">Former Protected Rank</div>
+    <select class="grm-select" id="grm-rank-select">
+      <option value="">— choose a rank —</option>
+    </select>
+
+    <div class="grm-divider"></div>
+
+    <div class="modal-actions right">
+      <button class="btn ghost" onclick="closeModal('grantRestorationModal')">Cancel</button>
+      <button class="btn primary grm-grant-btn" id="grm-grant-btn"
+              disabled onclick="confirmGrantRestoration()">Grant restoration</button>
+    </div>
   </div>
 </div>
 
@@ -4074,2010 +4136,4 @@ function _grantRestorationFlow(){
     // Clear any pre-selected state in the dropdown
     document.querySelectorAll("#rsto-rank-dropdown .csel-opt").forEach(o=>o.classList.remove("selected"));
     if(preview) preview.style.display = currentClaim ? "block" : "none";
-    const previewPlayer = document.getElementById("rsto-preview-player");
-    if(previewPlayer && currentClaim){
-      const cp = sorted.find(p=>p.rank===currentClaim);
-      if(cp) previewPlayer.textContent = `#${cp.rank} ${cp.name}`;
-    }
-    openModal("restoModal");
-  });
-}
-
-function _applyRestoGrant(){
-  const rankVal = document.getElementById("rsto-rank-value")?.value;
-  if(!rankVal || !pendingCh) return;
-  const rankNum = parseInt(rankVal, 10);
-  if(isNaN(rankNum)) return;
-  pendingCh.protectedRankClaim = rankNum;
-  pendingCh.restorationEligible = true;
-  const rp = appState.rosters[sessionState.groupKey].find(r=>r.id===pendingCh.id);
-  if(rp) rp.protectedRankClaim = rankNum;
-  saveState();
-  closeModal("restoModal");
-  openChallengeModal(pendingCh.id); // reopen with restoration card
-}
-function _removeRestorationPrivilege(e){
-  e.stopPropagation();
-  if(!pendingCh) return;
-  adminUnlockedAt = 0; // force re-authentication every time
-  requireAdminThen({
-    title: "Remove restoration privilege",
-    sub: `This will permanently remove ${pendingCh.name}'s one-time restoration challenge right. This action cannot be undone. Admin code required.`,
-    icon: "default"
-  }, ()=>{
-    // Clear the restoration claim from both session player and roster
-    pendingCh.restorationEligible = false;
-    pendingCh.protectedRankClaim  = null;
-    const rp = appState.rosters[sessionState.groupKey].find(r=>r.id===pendingCh.id);
-    if(rp) rp.protectedRankClaim = null;
-    saveState();
-    closeModal("chalModal");
-    renderLadder(); // refresh ladder view so no stale state
-  });
-}
-
-function confirmChallenge(){
-  if(!pendingCh || !pendingTg) return;
-  closeModal("chalModal");
-  sessionState.queue.push({ cId:pendingCh.id, tId:pendingTg.id });
-  // Ticket stays with challenger while match is active — it transfers to the defender on completion
-  processQueue();
-  renderLadder();
-}
-
-// processQueue no longer auto-assigns — it only removes stale entries
-function processQueue(){
-  sessionState.queue = sessionState.queue.filter(({cId, tId})=>{
-    return getP(cId) && getP(tId);
-  });
-}
-
-// ── MANUAL COURT ASSIGNMENT ──
-function assignQueueMatchToCourt(qIdx, courtIdx){
-  const entry = sessionState.queue[qIdx];
-  if(!entry) return;
-  const {cId, tId} = entry;
-  const ch = getP(cId), tg = getP(tId);
-  const court = sessionState.courts[courtIdx];
-  if(!court || court.match){ alert("That court is not free."); return; }
-  if(!ch || !tg){ alert("One of the players is no longer in the session."); return; }
-  if(ch.status !== "available") { alert(`${ch.name} is not available right now.`); return; }
-  if(tg.status !== "available") { alert(`${tg.name} is not available right now.`); return; }
-  sessionState.queue.splice(qIdx, 1);
-  const mid = ++sessionState.matchCounter;
-  ch.status = "playing"; tg.status = "playing";
-  court.match = mid;
-  sessionState.activeMatches[mid] = { cId, tId, courtNum: court.num, startTime: nowHHMM() };
-  saveState();
-  renderLadder();
-}
-
-// ── ADMIN CANCEL (active matches and queued matches) ──
-// ── SHARED ADMIN GATE ──
-function isAdminUnlocked(){
-  return Date.now() - adminUnlockedAt < ADMIN_WINDOW_MS;
-}
-
-// Generic admin-gated action runner.
-// opts: { title, sub, icon }   action: function to call after auth
-function requireAdminThen(opts, action){
-  if(isAdminUnlocked()){ action(); return; }
-  promptAdminCode({
-    title: opts.title || "Admin required",
-    sub:   opts.sub   || "Enter the 4-digit admin code to continue.",
-    icon:  opts.icon  || "default",
-    onSuccess: ()=>{
-      adminUnlockedAt = Date.now();
-      action();
-    }
-  });
-}
-
-// ── CANCEL MATCH (admin-gated, uses shared window) ──
-function cancelActiveMatch(mid){
-  requireAdminThen({
-    title: "Cancel active match",
-    sub: "Enter the admin code to cancel this match. No stats will be affected. Code stays active for 5 minutes.",
-    icon: "danger"
-  }, ()=>{
-    const m = sessionState.activeMatches[mid];
-    if(!m) return;
-    const ch = getP(m.cId), tg = getP(m.tId);
-    const court = sessionState.courts.find(c=>c.match===mid);
-    if(ch){ ch.status = "available"; }
-    if(tg){ tg.status = "available"; }
-    if(court){ court.match = null; }
-    delete sessionState.activeMatches[mid];
-    saveState();
-    renderLadder();
-  });
-}
-
-function cancelQueuedMatch(qIdx){
-  requireAdminThen({
-    title: "Cancel queued match",
-    sub: "Enter the admin code to remove this match from the queue. No stats will be affected.",
-    icon: "danger"
-  }, ()=>{
-    if(qIdx < 0 || qIdx >= sessionState.queue.length) return;
-    sessionState.queue.splice(qIdx, 1);
-    saveState();
-    renderLadder();
-  });
-}
-
-// ── EXCUSED PLAYERS ──
-function setPlayerExcused(pid, excused){
-  const p = getP(pid);
-  if(!p) return;
-  if(excused){
-    if(p.status === "playing"){ alert("Can't excuse a player while they're in an active match. Cancel the match first."); return; }
-    p.status = "excused";
-  } else {
-    if(p.status === "excused") p.status = "available";
-  }
-  saveState();
-  renderLadder();
-}
-
-function openScoreModal(mid){
-  pendingMid = mid;
-  const m = sessionState.activeMatches[mid];
-  const ch = getP(m.cId), tg = getP(m.tId);
-  const ps = sessionState.pointSystem || "21";
-  const cap = ps === "15" ? 21 : 30;
-  // Update rules box dynamically for current point system
-  const rulesBox = document.getElementById("sm-rules-box");
-  if(rulesBox){
-    rulesBox.innerHTML = ps === "15"
-      ? `<strong>Win by 2 to 15, capped at 21.</strong> First to 15 wins unless tied at 14–14. From there you must win by 2 (e.g. 16–14). If it reaches 20–20, the next point wins at 21–20.`
-      : `<strong>Win by 2 to 21, capped at 30.</strong> First to 21 wins unless tied at 20–20. From there you must win by 2 (e.g. 22–20). If it reaches 29–29, the next point wins at 30–29.`;
-  }
-  document.getElementById("sm-c-score").max = cap;
-  document.getElementById("sm-t-score").max = cap;
-  document.getElementById("sm-sub").textContent = `Court ${m.courtNum} · ${ch.name} vs ${tg.name} · ${ps}-point`;
-  document.getElementById("sm-c-name").textContent = ch.name;
-  document.getElementById("sm-t-name").textContent = tg.name;
-  document.getElementById("sm-c-score").value = "";
-  document.getElementById("sm-t-score").value = "";
-  document.getElementById("sm-winner").classList.add("hidden");
-  document.getElementById("sm-deuce").classList.remove("show");
-  document.getElementById("sm-golden").classList.remove("show");
-  document.getElementById("sm-hint").textContent = "Enter both final scores.";
-  document.getElementById("sm-hint").classList.remove("err");
-  document.getElementById("sm-go").disabled = true;
-  document.getElementById("sm-go").className = `btn primary ${ac()}`;
-  document.getElementById("sm-start").value = m.startTime || nowHHMM();
-  document.getElementById("sm-end").value = nowHHMM();
-  openModal("scoreModal");
-}
-
-function validateScore(cs, ts, ps){
-  ps = ps || (sessionState ? sessionState.pointSystem : "21");
-  const win = ps==="15" ? 15 : 21;
-  const deuceStart = win - 1;       // 14 or 20
-  const cap = ps==="15" ? 21 : 30;
-  const goldenStart = cap - 1;       // 20 or 29
-  if(isNaN(cs) || isNaN(ts)) return {valid:false, errorMsg:"Enter both final scores."};
-  if(cs<0 || ts<0 || cs>cap || ts>cap) return {valid:false, errorMsg:`Scores must be 0–${cap}.`};
-  if(cs===ts) return {valid:false, errorMsg:"Scores are tied — game isn't over."};
-  const winnerScore = Math.max(cs,ts), loserScore = Math.min(cs,ts);
-  if(winnerScore < win) return {valid:false, errorMsg:`First player to ${win} wins (or win by 2 in deuce).`};
-  if(winnerScore === win){
-    if(loserScore > deuceStart) return {valid:false, errorMsg:`Deuce at ${deuceStart}–${deuceStart}: must win by 2 (e.g. ${win+1}–${deuceStart}).`};
-    return {valid:true, winnerScore, loserScore, isDeuce:false, isGolden:false};
-  }
-  if(winnerScore < cap){
-    if(winnerScore - loserScore !== 2) return {valid:false, errorMsg:`In deuce, must win by exactly 2 (e.g. ${winnerScore}–${winnerScore-2}).`};
-    return {valid:true, winnerScore, loserScore, isDeuce:true, isGolden:false};
-  }
-  // At cap
-  if(loserScore === goldenStart) return {valid:true, winnerScore, loserScore, isDeuce:true, isGolden:true};
-  if(loserScore === goldenStart-1) return {valid:true, winnerScore, loserScore, isDeuce:true, isGolden:false};
-  return {valid:false, errorMsg:`At the ${cap} cap, score must be ${cap}–${goldenStart-1} or ${cap}–${goldenStart}.`};
-}
-
-function updateWinner(){
-  const cs = parseInt(document.getElementById("sm-c-score").value);
-  const ts = parseInt(document.getElementById("sm-t-score").value);
-  const wb = document.getElementById("sm-winner");
-  const hint = document.getElementById("sm-hint");
-  const go = document.getElementById("sm-go");
-  const deuce = document.getElementById("sm-deuce");
-  const golden = document.getElementById("sm-golden");
-  const ps = sessionState ? sessionState.pointSystem : "21";
-  const deuceStart = ps==="15" ? 14 : 20;
-  const goldenStart = ps==="15" ? 20 : 29;
-  wb.classList.add("hidden");
-  deuce.classList.remove("show");
-  golden.classList.remove("show");
-  if(!isNaN(cs) && !isNaN(ts)){
-    if(cs===goldenStart && ts===goldenStart) golden.classList.add("show");
-    else if(cs>=deuceStart && ts>=deuceStart && (cs===ts || Math.abs(cs-ts)===1)) deuce.classList.add("show");
-  }
-  const v = validateScore(cs, ts, ps);
-  if(!v.valid){
-    hint.textContent = v.errorMsg;
-    hint.classList.toggle("err", !isNaN(cs) && !isNaN(ts));
-    go.disabled = true;
-    return;
-  }
-  const m = sessionState.activeMatches[pendingMid];
-  const ch = getP(m.cId), tg = getP(m.tId);
-  const winnerName = cs>ts ? ch.name : tg.name;
-  let label = `${winnerName} wins ${v.winnerScore}–${v.loserScore}`;
-  if(v.isGolden) label += " (golden point)";
-  else if(v.isDeuce) label += " (deuce)";
-  wb.textContent = label;
-  wb.classList.remove("hidden");
-  hint.textContent = "Valid score — ready to save.";
-  hint.classList.remove("err");
-  if(v.isGolden){ golden.classList.add("show"); deuce.classList.remove("show"); }
-  else if(v.isDeuce){ deuce.classList.add("show"); }
-  go.disabled = false;
-}
-
-document.addEventListener("DOMContentLoaded", ()=>{
-  document.getElementById("sm-c-score").addEventListener("input", updateWinner);
-  document.getElementById("sm-t-score").addEventListener("input", updateWinner);
-  document.getElementById("egm-input").addEventListener("keydown", e=>{
-    if(e.key==="Enter") saveGroupName();
-    if(e.key==="Escape") closeModal("editGroupModal");
-  });
-  ["chalModal","scoreModal","editGroupModal","confirmModal","adminModal","datePickerModal","manualArchiveModal","playerProfileModal","restoModal","rulesModal"].forEach(id=>{
-    const el = document.getElementById(id);
-    if(el) el.addEventListener("click", e=>{ if(e.target.id===id) closeModal(id); });
-  });
-  // Admin PIN input handlers
-  setupAdminPinInput();
-  // Default date (sync hidden input + display)
-  const td = todayISO();
-  document.getElementById("home-date").value = td;
-  const disp = document.getElementById("home-date-display");
-  disp.textContent = formatDateDisplay(td);
-  disp.classList.remove("placeholder");
-  renderHome();
-  // Apply persisted language on startup
-  applyLang();
-});
-
-function confirmScore(){
-  const cs = parseInt(document.getElementById("sm-c-score").value);
-  const ts = parseInt(document.getElementById("sm-t-score").value);
-  const v = validateScore(cs, ts);
-  if(!v.valid) return;
-  const startT = document.getElementById("sm-start").value;
-  const endT = document.getElementById("sm-end").value;
-  const m = sessionState.activeMatches[pendingMid];
-  closeModal("scoreModal");
-  enterResult(pendingMid, cs>ts ? m.cId : m.tId, cs, ts, startT, endT, v.isDeuce, v.isGolden, false);
-}
-
-function confirmWalkover(){
-  if(!pendingMid || !sessionState.activeMatches[pendingMid]) return;
-  const cs = parseInt(document.getElementById("sm-c-score").value) || 0;
-  const ts = parseInt(document.getElementById("sm-t-score").value) || 0;
-  const m = sessionState.activeMatches[pendingMid];
-  const ch = getP(m.cId), tg = getP(m.tId);
-  // Whoever has more points wins; tie goes to defender
-  const winnerId = cs > ts ? m.cId : m.tId;
-  const winnerName = winnerId === m.cId ? ch.name : tg.name;
-  const startT = document.getElementById("sm-start").value;
-  const endT = document.getElementById("sm-end").value;
-  confirmAction(
-    "Record as walkover?",
-    `Score ${cs}–${ts} will be recorded as incomplete. ${winnerName} receives the win. Rankings update normally. This cannot be undone.`,
-    ()=>{
-      closeModal("scoreModal");
-      enterResult(pendingMid, winnerId, cs, ts, startT, endT, false, false, true);
-    },
-    "Record walkover"
-  );
-}
-
-function enterResult(mid, winnerId, cs, ts, startT, endT, isDeuce, isGolden, isWalkover=false){
-  const m = sessionState.activeMatches[mid];
-  const ch = getP(m.cId), tg = getP(m.tId);
-  const court = sessionState.courts.find(c=>c.match===mid);
-  const chalWon = winnerId === m.cId;
-  ch.wins += chalWon ? 1 : 0;
-  ch.losses += chalWon ? 0 : 1;
-  tg.wins += chalWon ? 0 : 1;
-  tg.losses += chalWon ? 1 : 0;
-  const chRB = ch.rank, tgRB = tg.rank;
-
-  // ── CASCADING LADDER ──
-  // When challenger wins, everyone ranked between the two shifts down by 1.
-  // This preserves relative order rather than just swapping two slots.
-  if(chalWon){
-    const winnerNewRank = tg.rank;
-    const winnerOldRank = ch.rank;
-    sessionState.players.forEach(p=>{
-      if(p.id !== ch.id && p.rank >= winnerNewRank && p.rank < winnerOldRank){
-        p.rank += 1;
-      }
-    });
-    ch.rank = winnerNewRank;
-    // Clear all locks on both players when challenger wins
-    ch.lockedAgainst = [];
-    tg.lockedAgainst = [];
-  } else {
-    // Challenger lost: lock them from immediately re-challenging same defender
-    if(!ch.lockedAgainst.includes(tg.id)) ch.lockedAgainst.push(tg.id);
-  }
-
-  let duration = "";
-  if(startT && endT){
-    const [sh,sm] = startT.split(":").map(Number);
-    const [eh,em] = endT.split(":").map(Number);
-    const diff = (eh*60+em) - (sh*60+sm);
-    if(diff>0) duration = `${diff} min`;
-  }
-
-  // Global match counter for this session
-  sessionState.totalMatchesPlayed = (sessionState.totalMatchesPlayed || 0) + 1;
-  const matchNum = sessionState.totalMatchesPlayed;
-  const ps = sessionState.pointSystem || "21";
-
-  // Check ticket state BEFORE transfer (so records capture accurate info)
-  const chalHadTicket = playerHasTicket(ch.id);
-  const defHadTicket  = playerHasTicket(tg.id);
-
-  const sessName = `${appState.groupNames[sessionState.groupKey]} — ${fmtDate(sessionDate)}`;
-  const sessId = `${sessionState.groupKey}_${sessionDate}_${cryptoRand()}`.slice(0,40);
-  const matchRecord = (forPlayer, opp, oppRankBefore, myScore, theirScore, won, rb, ra, wasChallenger) => ({
-    sessId, sessName, host:sessionHost, date:sessionDate, groupKey:sessionState.groupKey,
-    opponent:opp.name, opponentId:opp.id, opponentRankBefore:oppRankBefore,
-    myScore, theirScore, won, rankBefore:rb, rankAfter:ra, wasChallenger,
-    startTime:startT, endTime:endT, duration, isDeuce, isGolden,
-    pointSystem:ps, matchNum, isWalkover,
-    // Ticket state: was a ticket in play for this match?
-    ticketUsed: chalHadTicket && wasChallenger,
-    ticketReceived: chalHadTicket && !wasChallenger && !defHadTicket,
-    ticketCancelOut: chalHadTicket && !wasChallenger && defHadTicket
-  });
-
-  // Session history
-  if(!sessionState.sessionHistory[ch.id]) sessionState.sessionHistory[ch.id] = [];
-  if(!sessionState.sessionHistory[tg.id]) sessionState.sessionHistory[tg.id] = [];
-  sessionState.sessionHistory[ch.id].push(matchRecord(ch, tg, tgRB, cs, ts, chalWon, chRB, ch.rank, true));
-  sessionState.sessionHistory[tg.id].push(matchRecord(tg, ch, chRB, ts, cs, !chalWon, tgRB, tg.rank, false));
-
-  // Career history (long-term across sessions)
-  if(!appState.careerHistory[ch.id]) appState.careerHistory[ch.id] = [];
-  if(!appState.careerHistory[tg.id]) appState.careerHistory[tg.id] = [];
-  appState.careerHistory[ch.id].push(matchRecord(ch, tg, tgRB, cs, ts, chalWon, chRB, ch.rank, true));
-  appState.careerHistory[tg.id].push(matchRecord(tg, ch, chRB, ts, cs, !chalWon, tgRB, tg.rank, false));
-
-  // Save the completed match record
-  ch.status = "available"; tg.status = "available";
-  if(court) court.match = null;
-  delete sessionState.activeMatches[mid];
-  sessionState.completed.push({
-    mid, cId:m.cId, tId:m.tId, courtNum:m.courtNum,
-    chalName:ch.name, tgName:tg.name, chalWon,
-    chalScore:cs, tgScore:ts,
-    chalRankBefore:chRB, tgRankBefore:tgRB,
-    chalRankAfter:ch.rank, tgRankAfter:tg.rank,
-    startTime:startT, endTime:endT, duration, isDeuce, isGolden,
-    pointSystem:ps, matchNum, isWalkover
-  });
-
-  // ── TICKET TRANSFER / CANCEL-OUT ──
-  // Rule A: Only challenger had a ticket → transfers to defender.
-  // Rule B: Both had tickets → cancel-out: challenger loses theirs, defender keeps.
-  // Rule C: Only defender had ticket → no change.
-
-  if(chalHadTicket){
-    sessionState.ticketedPlayers = sessionState.ticketedPlayers.filter(id=>id!==ch.id);
-    if(!defHadTicket){
-      if(getP(tg.id)) sessionState.ticketedPlayers.push(tg.id);
-    }
-    // Rule B: defender already had ticket — they keep it, challenger's consumed (cancel-out)
-  }
-
-  // ── RESTORATION CLAIM CLEARANCE ──
-  // After a restoration challenge (whether won or lost), the player's
-  // protectedRankClaim is consumed — they've had their one-time return match.
-  if(ch.restorationEligible && ch.protectedRankClaim){
-    ch.protectedRankClaim = null;
-    ch.restorationEligible = false;
-    // Also clear from the persistent roster so it doesn't carry over again
-    const gk = sessionState.groupKey;
-    const rosterP = appState.rosters[gk].find(r=>r.id===ch.id);
-    if(rosterP) rosterP.protectedRankClaim = null;
-  }
-
-  saveState();
-  processQueue();
-  renderLadder();
-  if(openProfileId && (openProfileId===ch.id || openProfileId===tg.id)) renderProfilePanel(openProfileId);
-}
-
-function renderLadder(){
-  if(!sessionState) return;
-  document.getElementById("court-count").textContent = sessionState.courtCount;
-  document.getElementById("court-minus").disabled = sessionState.courtCount <= MIN_COURTS;
-  document.getElementById("court-plus").disabled = sessionState.courtCount >= MAX_COURTS;
-
-  const chalMap = {}, targMap = {};
-  sessionState.queue.forEach(q=>{
-    chalMap[q.cId] = getP(q.tId)?.name;
-    targMap[q.tId] = getP(q.cId)?.name;
-  });
-  Object.entries(sessionState.activeMatches).forEach(([mid,m])=>{
-    chalMap[m.cId] = getP(m.tId)?.name;
-    targMap[m.tId] = getP(m.cId)?.name;
-  });
-
-  document.getElementById("s-in").textContent = sessionState.players.length;
-  document.getElementById("s-courts").textContent = sessionState.courts.filter(c=>c.match).length;
-  document.getElementById("s-matches").textContent = sessionState.completed.length;
-  document.getElementById("s-queue").textContent = sessionState.queue.length;
-
-  const accent = ac();
-  const list = document.getElementById("ladder-list");
-  list.innerHTML = "";
-  const activeTickets = getActiveTickets();
-  const maxTickets = getMaxTickets();
-  const canAddMore = activeTickets.length < maxTickets;
-
-  byRank().forEach(p=>{
-    const playing = p.status==="playing";
-    const excused = p.status==="excused";
-    const isProtected = !!p.isProtected;
-    const chal = !!chalMap[p.id];
-    const hasTicket = playerHasTicket(p.id);
-    const row = document.createElement("div");
-    row.className = "ldr-row"+(playing?" playing":"")+(chal?" challenging":"")+(excused?" excused":"")+(isProtected?" protected-row":"");
-    let rc = ""; if(p.rank===1) rc="g"; else if(p.rank===2) rc="s"; else if(p.rank===3) rc="b";
-    let tags = "";
-    if(playing) tags += `<span class="tag tag-p">playing</span>`;
-    if(excused) tags += `<span class="tag tag-ex">excused</span>`;
-    if(isProtected) tags += `<span class="tag tag-prot">🛡 protected</span>`;
-    if(chal) tags += `<span class="tag tag-c">↑ ${escapeHtml(chalMap[p.id])}</span>`;
-    if(targMap[p.id]) tags += `<span class="tag tag-t">← ${escapeHtml(targMap[p.id])}</span>`;
-    if(p.lockedAgainst.length) tags += `<span class="tag tag-lk">🔒</span>`;
-
-    const targets = getTargets(p);
-    const hasT = targets.some(t=>t.ok);
-    const dis = (!hasT || p.status!=="available") ? "disabled" : "";
-    const excuseLabel = excused ? "Un-excuse" : "Excuse";
-
-    // Ticket badge and controls
-    const ticketBadgeHTML = isProtected
-      // Protected players: no ticket UI at all
-      ? ``
-      : hasTicket
-        ? `<span class="ticket-badge"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a2 2 0 0 1 2-2h1a1 1 0 0 0 1-1V5a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h1a2 2 0 0 1 2 2v1a1 1 0 0 0-1 1v1a2 2 0 0 1-2 2h-1a1 1 0 0 0-1 1v1a2 2 0 0 1-4 0v-1a1 1 0 0 0-1-1H4a2 2 0 0 1-2-2v-1a1 1 0 0 0-1-1V9z"/></svg> Ticket</span>
-           <span class="ticket-ctrl"><button class="ticket-remove-btn" data-pid="${p.id}" title="Revoke ticket"><svg width="7" height="7" viewBox="0 0 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="1" y1="3.5" x2="6" y2="3.5"/></svg></button></span>`
-        : `<span class="ticket-ctrl"><button class="ticket-add-btn" data-pid="${p.id}" title="${canAddMore?"Grant ticket":"Max tickets reached"}" ${canAddMore?"":"disabled"}><svg width="7" height="7" viewBox="0 0 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3.5" y1="1" x2="3.5" y2="6"/><line x1="1" y1="3.5" x2="6" y2="3.5"/></svg></button></span>`;
-
-    row.innerHTML = `
-      <div class="rank-num ${rc}">${p.rank}</div>
-      <div>
-        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:0">
-          <span class="pname-link" data-id="${p.id}">${escapeHtml(p.name)}</span>${ticketBadgeHTML}
-        </div>
-        <div class="ptags">${tags}</div>
-      </div>
-      <div class="wl-cell">${p.wins}–${p.losses}</div>
-      <div style="display:flex;align-items:center;gap:4px">
-        <span class="sdot ${playing?"sdot-r":excused?"":"sdot-g"}"></span>
-        <span style="font-size:10px;color:var(--ink-3);text-transform:capitalize">${p.status}</span>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:flex-end;gap:4px">
-        <div class="row-menu-wrap" data-pid="${p.id}">
-          <button class="row-menu-btn" title="More options" aria-label="More options">⋮</button>
-          <div class="row-menu-popup" id="rmenu_${p.id}">
-            <button class="rmp-item${excused?" warn":""}" data-pid="${p.id}" data-action="excuse">
-              ${excused
-                ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg> Un-excuse`
-                : `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Excuse`}
-            </button>
-          </div>
-        </div>
-        <button class="chal-btn ${accent}" ${dis} data-id="${p.id}">Challenge ↑</button>
-      </div>`;
-    list.appendChild(row);
-  });
-
-  document.querySelectorAll(".pname-link").forEach(el=>el.addEventListener("click",()=>openProfilePanel(el.dataset.id)));
-  document.querySelectorAll(".chal-btn:not([disabled])").forEach(btn=>btn.addEventListener("click",()=>openChallengeModal(btn.dataset.id)));
-
-  // Ticket controls — always admin-gated
-  document.querySelectorAll(".ticket-add-btn:not([disabled])").forEach(btn=>{
-    btn.addEventListener("click", e=>{ e.stopPropagation(); requestGrantTicket(btn.dataset.pid); });
-  });
-  document.querySelectorAll(".ticket-remove-btn").forEach(btn=>{
-    btn.addEventListener("click", e=>{ e.stopPropagation(); requestRevokeTicket(btn.dataset.pid); });
-  });
-
-  // 3-dot menu: open/close
-  document.querySelectorAll(".row-menu-btn").forEach(btn=>{
-    btn.addEventListener("click", e=>{
-      e.stopPropagation();
-      const wrap = btn.closest(".row-menu-wrap");
-      const pid = wrap.dataset.pid;
-      const popup = document.getElementById("rmenu_"+pid);
-      const isOpen = popup.classList.contains("open");
-      closeAllRowMenus();
-      if(!isOpen){
-        const r = btn.getBoundingClientRect();
-        popup.style.top = (r.bottom + 4) + "px";
-        popup.style.right = (window.innerWidth - r.right) + "px";
-        popup.classList.add("open");
-      }
-    });
-  });
-  document.querySelectorAll(".rmp-item[data-action='excuse']").forEach(item=>{
-    item.addEventListener("click", e=>{
-      e.stopPropagation();
-      const pid = item.dataset.pid;
-      const p = getP(pid);
-      if(p) setPlayerExcused(pid, p.status !== "excused");
-      closeAllRowMenus();
-    });
-  });
-
-  // Update ticket counter bar
-  renderTicketCounter();
-
-  // Courts — with Cancel button on active courts
-  const cp = document.getElementById("courts-panel");
-  cp.innerHTML = "";
-  sessionState.courts.forEach((court, idx)=>{
-    const div = document.createElement("div");
-    div.className = "court-card";
-    const courtLabel = (window._editingCourtIdx === idx)
-      ? `<span class="court-name-lbl">Court <input type="number" min="1" max="99" class="court-num-input" id="court-num-inp-${idx}" value="${court.num}" style="width:42px;font-size:12px;font-weight:600;padding:1px 4px;border:1px solid var(--line-2);border-radius:4px;text-align:center;background:var(--surface);color:var(--ink);outline:none"></span> <span class="pencil" onclick="saveCourtNum(${idx})" title="Save">✓</span><span class="pencil" onclick="cancelCourtNumEdit()" title="Cancel">✕</span>`
-      : `<span class="court-name-lbl">Court ${court.num}</span><span class="pencil" onclick="event.stopPropagation();startCourtNumEdit(${idx})" title="Edit court number">✎</span>`;
-    if(court.match){
-      const m = sessionState.activeMatches[court.match];
-      const ch = getP(m.cId), tg = getP(m.tId);
-      const mid = court.match;
-      div.innerHTML = `
-        <div class="court-top"><span style="display:flex;align-items:center;gap:3px">${courtLabel}</span><span class="cbadge cbadge-on">In play</span></div>
-        <div class="cplayers">${escapeHtml(ch?.name)} <span style="color:var(--ink-3);font-size:10px">vs</span> ${escapeHtml(tg?.name)}</div>
-        <div class="cmeta">#${ch?.rank} vs #${tg?.rank}${m.startTime?" · started "+m.startTime:""}</div>
-        <div style="display:flex;gap:6px;margin-top:6px">
-          <button class="score-btn" data-mid="${mid}" style="flex:1">Enter score</button>
-          <button class="cancel-match-btn" data-mid="${mid}" title="Cancel match (admin)">✕ Cancel</button>
-        </div>`;
-      div.querySelector(".score-btn").onclick = ()=>openScoreModal(mid);
-      div.querySelector(".cancel-match-btn").onclick = ()=>cancelActiveMatch(mid);
-    } else {
-      div.innerHTML = `
-        <div class="court-top"><span style="display:flex;align-items:center;gap:3px">${courtLabel}</span><span class="cbadge cbadge-off">Open</span></div>
-        <div class="cplayers" style="font-size:12px;color:var(--ink-3)">Waiting for assignment</div>`;
-    }
-    cp.appendChild(div);
-    if(window._editingCourtIdx === idx){
-      const inp = document.getElementById(`court-num-inp-${idx}`);
-      if(inp){
-        inp.focus();
-        inp.select();
-        inp.addEventListener("keydown", e=>{
-          if(e.key === "Enter") saveCourtNum(idx);
-          if(e.key === "Escape") cancelCourtNumEdit();
-        });
-      }
-    }
-  });
-
-  // Queue — with assign-to-court buttons and cancel button
-  const qp = document.getElementById("queue-panel");
-  qp.innerHTML = "";
-  if(!sessionState.queue.length){
-    qp.innerHTML = `<div class="empty-q">No challenges queued</div>`;
-  } else {
-    const freeCourts = sessionState.courts
-      .map((c, idx) => ({ idx, num: c.num, free: !c.match }))
-      .filter(c => c.free);
-    sessionState.queue.forEach(({cId, tId}, qIdx)=>{
-      const ch = getP(cId), tg = getP(tId);
-      const bothAvail = ch?.status === "available" && tg?.status === "available";
-      const div = document.createElement("div");
-      div.className = "queue-item";
-      div.style.flexDirection = "column";
-      div.style.alignItems = "flex-start";
-      // Header row
-      const header = document.createElement("div");
-      header.style.cssText = "display:flex;align-items:flex-start;gap:8px;width:100%";
-      header.innerHTML = `
-        <div class="qn">${qIdx+1}</div>
-        <div style="flex:1">
-          <div class="qmain">${escapeHtml(ch?.name)} → ${escapeHtml(tg?.name)}</div>
-          <div class="qsub">#${ch?.rank} challenges #${tg?.rank}</div>
-        </div>
-        <button class="cancel-match-btn" data-qidx="${qIdx}" style="margin-top:0;padding:3px 8px;font-size:10px" title="Cancel (admin)">✕</button>`;
-      div.appendChild(header);
-      // Assign buttons row
-      const assignRow = document.createElement("div");
-      assignRow.className = "queue-assign-row";
-      if(freeCourts.length === 0){
-        assignRow.innerHTML = `<span style="font-size:10px;color:var(--ink-3);font-style:italic;margin-left:26px">No open courts</span>`;
-      } else {
-        freeCourts.forEach(({idx: cIdx, num})=>{
-          const btn = document.createElement("button");
-          btn.className = `assign-court-btn${accent?" "+accent:""}`;
-          btn.textContent = `→ Court ${num}`;
-          btn.disabled = !bothAvail;
-          btn.title = bothAvail ? `Assign to Court ${num}` : "One or both players are not available";
-          btn.addEventListener("click", ()=>assignQueueMatchToCourt(qIdx, cIdx));
-          assignRow.appendChild(btn);
-        });
-      }
-      div.appendChild(assignRow);
-      qp.appendChild(div);
-    });
-    // Wire up cancel buttons
-    qp.querySelectorAll(".cancel-match-btn[data-qidx]").forEach(btn=>{
-      btn.addEventListener("click", ()=>cancelQueuedMatch(parseInt(btn.dataset.qidx)));
-    });
-  }
-}
-
-// ──────────────────────────────────────────────────────
-//  PROFILE PANEL (live session)
-// ──────────────────────────────────────────────────────
-function openProfilePanel(pid){
-  openProfileId = pid;
-  renderProfilePanel(pid);
-  document.getElementById("profile-panel").classList.add("open");
-}
-function closeProfilePanel(){
-  document.getElementById("profile-panel").classList.remove("open");
-  openProfileId = null;
-  profileEditActive = false;
-}
-
-function rankMoveHTML(m){
-  const before = m.rankBefore, after = m.rankAfter;
-  if(before === after){
-    const note = m.won ? "Held position" : "Stayed (challenger lost)";
-    return `<div class="pp-rank-move same"><span class="pp-rank-arrow">→</span><div>#${before} · ${note}</div></div>`;
-  }
-  if(after < before){
-    return `<div class="pp-rank-move up"><span class="pp-rank-arrow">↑</span><div>Moved up: <span class="pp-rank-old">#${before}</span> → <span class="pp-rank-new">#${after}</span></div></div>`;
-  }
-  return `<div class="pp-rank-move down"><span class="pp-rank-arrow">↓</span><div>Moved down: <span class="pp-rank-old">#${before}</span> → <span class="pp-rank-new">#${after}</span></div></div>`;
-}
-
-function renderProfilePanel(pid){
-  const allRosters = [].concat(appState.rosters.perf, appState.rosters.jun);
-  const p = allRosters.find(r=>r.id===pid);
-  if(!p) return;
-  const lp = sessionState.players.find(pl=>pl.id===pid);
-  // Live panel shows only THIS session's matches (not full career)
-  const sessionMatches = (sessionState.sessionHistory && sessionState.sessionHistory[pid]) || [];
-  const totalW = sessionMatches.filter(x=>x.won).length;
-  const totalL = sessionMatches.filter(x=>!x.won).length;
-  const initials = p.name.split(/\s+/).map(w=>w[0]).join("").toUpperCase().slice(0,2);
-  const accent = ac();
-  const av = document.getElementById("pp-avatar");
-  av.textContent = initials;
-  av.className = `pp-avatar ${accent}`;
-  document.getElementById("pp-rank").textContent = lp ? `Rank #${lp.rank} · ${gn()}` : "Not in today's session";
-
-  if(profileEditActive && openProfileId===pid){
-    document.getElementById("pp-name").innerHTML = `<input id="pp-name-inp" style="font-size:13px;font-weight:600;border:1px solid var(--line-2);border-radius:5px;padding:3px 7px;outline:none;width:120px" value="${escapeHtml(p.name)}"> <span class="pencil" onclick="savePPName('${pid}')">✓</span><span class="pencil" onclick="cancelPPEdit('${pid}')">✕</span>`;
-    setTimeout(()=>{
-      const inp = document.getElementById("pp-name-inp");
-      if(inp){
-        inp.focus();
-        inp.addEventListener("keydown",e=>{
-          if(e.key==="Enter") savePPName(pid);
-          if(e.key==="Escape") cancelPPEdit(pid);
-        });
-      }
-    },50);
-  } else {
-    document.getElementById("pp-name").innerHTML = `${escapeHtml(p.name)} <span class="pencil" onclick="startPPEdit('${pid}')">✎</span>`;
-  }
-
-  // Reverse-chronological with "1.", "2.", "3." labels
-  let histHTML = "";
-  if(!sessionMatches.length){
-    histHTML = `<div class="pp-empty">No matches yet this session</div>`;
-  } else {
-    const reversed = [...sessionMatches].reverse();
-    reversed.forEach((m, idx)=>{
-      const label = matchLabel(sessionMatches.length - idx);
-      const role = m.wasChallenger ? "as challenger" : "as defender";
-      const psLabel = m.pointSystem ? ` · ${m.pointSystem}-pt` : "";
-      histHTML += `<div class="pp-match">
-        <div class="pp-match-top">
-          <div class="pp-match-opp"><span style="font-size:10px;font-weight:600;color:var(--ink-3);margin-right:5px">${label}</span>vs ${escapeHtml(m.opponent)} <span class="pp-match-opp-sub">(was #${m.opponentRankBefore}, ${role})</span></div>
-          <div class="pp-match-score">${m.myScore}–${m.theirScore}</div>
-        </div>
-        ${m.isWalkover?`<div class="walkover-notice">⚠ Walkover — match incomplete</div>`:""}
-        ${rankMoveHTML(m)}
-        <div class="pp-match-sub">
-          <span class="pp-result ${m.won?"pp-w":"pp-l"}">${m.won?"Win":"Loss"}</span>
-          ${m.isWalkover?`<span class="pp-walkover">Walkover</span>`:""}
-          ${m.isGolden?`<span class="pp-deuce">Golden pt</span>`:m.isDeuce?`<span class="pp-deuce">Deuce</span>`:""}
-          ${m.startTime?`<span>${m.startTime}${m.endTime?"–"+m.endTime:""}</span>`:""}
-          ${m.duration?`<span>${m.duration}</span>`:""}
-          ${psLabel?`<span>${psLabel}</span>`:""}
-        </div>
-      </div>`;
-    });
-  }
-
-  document.getElementById("pp-body").innerHTML = `
-    <div class="pp-stats">
-      <div class="pp-stat"><div class="pp-stat-n">${totalW+totalL}</div><div class="pp-stat-l">Today</div></div>
-      <div class="pp-stat"><div class="pp-stat-n">${totalW}</div><div class="pp-stat-l">Wins</div></div>
-      <div class="pp-stat"><div class="pp-stat-n">${totalL}</div><div class="pp-stat-l">Losses</div></div>
-      <div class="pp-stat"><div class="pp-stat-n">${totalW+totalL>0 ? Math.round(totalW/(totalW+totalL)*100)+"%" : "–"}</div><div class="pp-stat-l">Win rate</div></div>
-    </div>
-    <div class="pp-section-title">This session's matches</div>
-    ${histHTML}`;
-}
-
-function startPPEdit(pid){ profileEditActive = true; openProfileId = pid; renderProfilePanel(pid); }
-function cancelPPEdit(pid){ profileEditActive = false; renderProfilePanel(pid); }
-function savePPName(pid){
-  const inp = document.getElementById("pp-name-inp");
-  if(inp && inp.value.trim()){
-    const n = inp.value.trim();
-    const r = [].concat(appState.rosters.perf, appState.rosters.jun).find(x=>x.id===pid);
-    if(r) r.name = n;
-    if(sessionState){
-      const lp = sessionState.players.find(p=>p.id===pid);
-      if(lp) lp.name = n;
-    }
-    saveState();
-  }
-  profileEditActive = false;
-  renderProfilePanel(pid);
-  if(sessionState) renderLadder();
-}
-
-// ──────────────────────────────────────────────────────
-//  END SESSION → RESULTS
-// ──────────────────────────────────────────────────────
-function confirmEndSession(){
-  if(!sessionState) return;
-  if(Object.keys(sessionState.activeMatches).length > 0){
-    alert("There are still active matches. Enter their scores or wait for them to finish before ending the session.");
-    return;
-  }
-  confirmAction(
-    "End this session?",
-    `This will finalize the ${gn()} session for ${fmtDate(sessionDate)}, save it to Match History, and take you to the Results page. You can revisit it anytime.`,
-    ()=>{
-      archiveCurrentSession();
-      goScreen("results");
-    },
-    "End session"
-  );
-}
-
-function archiveCurrentSession(){
-  if(!sessionState) return;
-  const archiveId = `${sessionState.groupKey}_${sessionDate}_${cryptoRand()}`;
-  const archive = {
-    id: archiveId,
-    groupKey: sessionState.groupKey,
-    groupName: appState.groupNames[sessionState.groupKey],
-    date: sessionDate,
-    host: sessionHost,
-    endedAt: new Date().toISOString(),
-    courtCount: sessionState.courtCount,
-    players: JSON.parse(JSON.stringify(sessionState.players)),
-    courts: JSON.parse(JSON.stringify(sessionState.courts)),
-    completed: JSON.parse(JSON.stringify(sessionState.completed)),
-    sessionHistory: JSON.parse(JSON.stringify(sessionState.sessionHistory))
-  };
-  appState.archives[sessionState.groupKey].unshift(archive);
-
-  // ── PERSIST FINAL RANK ORDER BACK TO ROSTER ──
-  // After each session the final standings become the new default starting order.
-  // Players who didn't participate stay at the bottom, below session participants.
-  const gk = sessionState.groupKey;
-  const sortedPlayers = [...sessionState.players].sort((a,b)=>a.rank-b.rank);
-  const participantIds = new Set(sortedPlayers.map(p=>p.id));
-  const nonParticipants = appState.rosters[gk].filter(p=>!participantIds.has(p.id));
-  // Rebuild roster: session participants in final rank order, then non-participants
-  const newRoster = [
-    ...sortedPlayers.map(sp=>{
-      // Merge back any roster-level fields (name may have been edited in-session)
-      const existing = appState.rosters[gk].find(r=>r.id===sp.id);
-      return { ...(existing||{}), id:sp.id, name:sp.name };
-    }),
-    ...nonParticipants
-  ];
-  appState.rosters[gk] = newRoster;
-
-  saveState();
-  // Tag current session as archived (so Results screen knows what to show)
-  sessionState._archived = archiveId;
-}
-
-// ──────────────────────────────────────────────────────
-//  RESULTS SCREEN
-// ──────────────────────────────────────────────────────
-function getResultsData(){
-  // Either from sessionState (just ended) or from archive (viewing past)
-  if(viewingArchive && viewingArchive.archiveId){
-    const a = appState.archives[viewingArchive.groupKey].find(x=>x.id===viewingArchive.archiveId);
-    if(a) return {
-      players: a.players, courts: a.courts, completed: a.completed,
-      sessionHistory: a.sessionHistory, date: a.date, host: a.host,
-      groupName: a.groupName, groupKey: a.groupKey, isArchive: true
-    };
-  }
-  if(sessionState){
-    return {
-      players: sessionState.players, courts: sessionState.courts, completed: sessionState.completed,
-      sessionHistory: sessionState.sessionHistory, date: sessionDate, host: sessionHost,
-      groupName: appState.groupNames[sessionState.groupKey], groupKey: sessionState.groupKey,
-      isArchive: !!sessionState._archived
-    };
-  }
-  return null;
-}
-
-function renderResults(){
-  const data = getResultsData();
-  if(!data) return;
-  // Results nav: only Home + Results
-  document.getElementById("tab-results").classList.remove("hidden");
-  ["tab-checkin","tab-ladder"].forEach(id=>{
-    const el = document.getElementById(id);
-    if(el) el.classList.add("hidden");
-  });
-  document.getElementById("nav-logo").className = `nav-logo ${data.groupKey==="perf"?"perf":"jun"}`;
-  document.getElementById("nav-sub").textContent = `${data.groupName} · ${fmtDate(data.date)} · Host: ${data.host}`;
-  document.getElementById("results-eyebrow").textContent = data.isArchive ? "Session archive" : "Session complete";
-  document.getElementById("results-title").textContent = "Final standings";
-  document.getElementById("results-sub").textContent = `${data.groupName} · ${fmtDate(data.date)} · ${data.completed.length} matches played · Host: ${data.host}`;
-
-  const standings = [...data.players].sort((a,b)=>a.rank-b.rank);
-
-  // Podium for top 3
-  const podium = document.getElementById("podium");
-  podium.innerHTML = "";
-  const podiumOrder = [
-    { rank:2, pos:"second", label:"2nd" },
-    { rank:1, pos:"first", label:"1st" },
-    { rank:3, pos:"third", label:"3rd" }
-  ];
-  podiumOrder.forEach(({rank,pos,label})=>{
-    const p = standings.find(x=>x.rank===rank);
-    if(!p){
-      const empty = document.createElement("div");
-      empty.className = `podium-card ${pos}`;
-      empty.style.opacity = "0.3";
-      empty.innerHTML = `<div class="podium-pos">${label}</div><div class="podium-medal">–</div><div class="podium-name">—</div><div class="podium-record">No player</div>`;
-      podium.appendChild(empty);
-      return;
-    }
-    const card = document.createElement("div");
-    card.className = `podium-card ${pos}`;
-    card.onclick = ()=>openResultsProfile(p.id);
-    const total = p.wins + p.losses;
-    const wr = total>0 ? Math.round(p.wins/total*100) : 0;
-    card.innerHTML = `
-      <div class="podium-pos">${label} place</div>
-      <div class="podium-medal">${rank}</div>
-      <div class="podium-name">${escapeHtml(p.name)}</div>
-      <div class="podium-record">${p.wins}W–${p.losses}L · ${wr}% win rate</div>
-    `;
-    podium.appendChild(card);
-  });
-
-  // Full standings table
-  const list = document.getElementById("standings-list");
-  list.innerHTML = "";
-  standings.forEach(p=>{
-    const total = p.wins + p.losses;
-    const wr = total>0 ? Math.round(p.wins/total*100) : 0;
-    let rc = ""; if(p.rank===1) rc="g"; else if(p.rank===2) rc="s"; else if(p.rank===3) rc="b";
-    const row = document.createElement("div");
-    row.className = "standings-row";
-    row.innerHTML = `
-      <div class="standings-rank ${rc}">${p.rank}</div>
-      <div class="standings-name" data-id="${p.id}">${escapeHtml(p.name)}</div>
-      <div class="standings-num">${p.wins}</div>
-      <div class="standings-num">${p.losses}</div>
-      <div>
-        <div class="winrate-bar"><div class="winrate-fill" style="width:${wr}%;background:var(--perf)"></div></div>
-        <div style="font-size:10px;color:var(--ink-3);margin-top:3px;text-align:right">${wr}%</div>
-      </div>
-    `;
-    list.appendChild(row);
-  });
-  list.querySelectorAll(".standings-name").forEach(el=>{
-    el.addEventListener("click", ()=>openResultsProfile(el.dataset.id));
-  });
-
-  // Side: courts (final state)
-  const cp = document.getElementById("results-courts-panel");
-  cp.innerHTML = "";
-  data.courts.forEach(court=>{
-    const div = document.createElement("div");
-    div.className = "court-card";
-    div.innerHTML = `
-      <div class="court-top"><span class="court-name-lbl">Court ${court.num}</span><span class="cbadge cbadge-off">Closed</span></div>
-      <div class="cplayers" style="font-size:12px;color:var(--ink-3)">Session ended</div>`;
-    cp.appendChild(div);
-  });
-
-  // Hide profile until clicked
-  document.getElementById("results-profile-panel").classList.remove("open");
-  document.getElementById("results-profile-prompt").style.display = "block";
-  resultsOpenProfileId = null;
-}
-
-function openResultsProfile(pid){
-  resultsOpenProfileId = pid;
-  renderResultsProfile(pid);
-  document.getElementById("results-profile-prompt").style.display = "none";
-  document.getElementById("results-profile-panel").classList.add("open");
-}
-function closeResultsProfile(){
-  document.getElementById("results-profile-panel").classList.remove("open");
-  document.getElementById("results-profile-prompt").style.display = "block";
-  resultsOpenProfileId = null;
-}
-
-function renderResultsProfile(pid){
-  const data = getResultsData();
-  if(!data) return;
-  const p = data.players.find(x=>x.id===pid);
-  if(!p) return;
-  const sessionMatches = data.sessionHistory[pid] || [];
-  const totalW = sessionMatches.filter(x=>x.won).length;
-  const totalL = sessionMatches.filter(x=>!x.won).length;
-  const initials = p.name.split(/\s+/).map(w=>w[0]).join("").toUpperCase().slice(0,2);
-  const accent = data.groupKey==="jun" ? "jun" : "";
-  const av = document.getElementById("rpp-avatar");
-  av.textContent = initials;
-  av.className = `pp-avatar ${accent}`;
-  document.getElementById("rpp-name").textContent = p.name;
-  document.getElementById("rpp-rank").textContent = `Final rank #${p.rank} · ${data.groupName}`;
-  let histHTML = "";
-  if(!sessionMatches.length){
-    histHTML = `<div class="pp-empty">No matches played this session</div>`;
-  } else {
-    const reversed = [...sessionMatches].reverse();
-    reversed.forEach((m, idx)=>{
-      const label = matchLabel(sessionMatches.length - idx);
-      const role = m.wasChallenger ? "as challenger" : "as defender";
-      const psLabel = m.pointSystem ? ` · ${m.pointSystem}-pt` : "";
-      histHTML += `<div class="pp-match">
-        <div class="pp-match-top">
-          <div class="pp-match-opp"><span style="font-size:10px;font-weight:600;color:var(--ink-3);margin-right:5px">${label}</span>vs ${escapeHtml(m.opponent)} <span class="pp-match-opp-sub">(was #${m.opponentRankBefore}, ${role})</span></div>
-          <div class="pp-match-score">${m.myScore}–${m.theirScore}</div>
-        </div>
-        ${m.isWalkover?`<div class="walkover-notice">⚠ Walkover — match incomplete</div>`:""}
-        ${rankMoveHTML(m)}
-        <div class="pp-match-sub">
-          <span class="pp-result ${m.won?"pp-w":"pp-l"}">${m.won?"Win":"Loss"}</span>
-          ${m.isWalkover?`<span class="pp-walkover">Walkover</span>`:""}
-          ${m.isGolden?`<span class="pp-deuce">Golden pt</span>`:m.isDeuce?`<span class="pp-deuce">Deuce</span>`:""}
-          ${m.startTime?`<span>${m.startTime}${m.endTime?"–"+m.endTime:""}</span>`:""}
-          ${m.duration?`<span>${m.duration}</span>`:""}
-          ${psLabel?`<span>${psLabel}</span>`:""}
-        </div>
-      </div>`;
-    });
-  }
-  document.getElementById("rpp-body").innerHTML = `
-    <div class="pp-stats">
-      <div class="pp-stat"><div class="pp-stat-n">${totalW+totalL}</div><div class="pp-stat-l">Session matches</div></div>
-      <div class="pp-stat"><div class="pp-stat-n">${totalW}</div><div class="pp-stat-l">Wins</div></div>
-      <div class="pp-stat"><div class="pp-stat-n">${totalL}</div><div class="pp-stat-l">Losses</div></div>
-      <div class="pp-stat"><div class="pp-stat-n">${totalW+totalL>0?Math.round(totalW/(totalW+totalL)*100)+"%":"–"}</div><div class="pp-stat-l">Win rate</div></div>
-    </div>
-    <div class="pp-section-title">This session's matches</div>
-    ${histHTML}
-  `;
-}
-
-function exitToHome(){
-  sessionState = null;
-  sessionHost = "";
-  sessionDate = "";
-  viewingArchive = null;
-  document.getElementById("tab-results").classList.add("hidden");
-  document.getElementById("tab-history").classList.add("hidden");
-  document.getElementById("tab-checkin").disabled = true;
-  document.getElementById("tab-ladder").disabled = true;
-  setHistoryNavMode(false);
-  setPlayersTabVisible(true);
-  goScreen("home");
-}
-
-// ──────────────────────────────────────────────────────
-//  MATCH HISTORY
-// ──────────────────────────────────────────────────────
-function renderHistory(){
-  if(!viewingArchive){ goScreen("home"); return; }
-  const groupKey = viewingArchive.groupKey;
-  document.getElementById("history-title").textContent = `${appState.groupNames[groupKey]} · Match History`;
-  document.getElementById("history-sub").textContent = `All archived sessions for this group`;
-  // Show the + Manual archive button
-  const maBtn = document.getElementById("ma-open-btn");
-  if(maBtn){
-    maBtn.style.display = "inline-flex";
-    document.getElementById("ma-group").value = groupKey;
-  }
-  const archives = appState.archives[groupKey] || [];
-  // Always display newest session date first, regardless of insertion order
-  const sortedArchives = [...archives].sort((a, b) =>
-    (a.date || "") < (b.date || "") ? 1 : (a.date || "") > (b.date || "") ? -1 : 0
-  );
-  const body = document.getElementById("history-body");
-  body.innerHTML = "";
-  if(!sortedArchives.length){
-    body.innerHTML = `<div class="history-empty">
-      <div class="history-empty-title">No archived sessions yet</div>
-      <div>Complete a ${appState.groupNames[groupKey]} ladder session and end it to see it archived here. Or use <strong>+ Manual archive</strong> to import past standings.</div>
-    </div>`;
-    return;
-  }
-  sortedArchives.forEach(a=>{
-    const sortedByRank = [...a.players].sort((x,y)=>x.rank-y.rank);
-    const top3 = sortedByRank.slice(0,3).map(p=>`#${p.rank} ${p.name}`).join(" · ");
-    const card = document.createElement("div");
-    card.className = "archive-card";
-    const manualBadge = a.isManual ? `<span class="manual-archive-badge">Manual import</span>` : "";
-    const matchInfo = a.isManual
-      ? `<span>Standings only</span><span>${a.notes ? escapeHtml(a.notes) : ""}</span>`
-      : `<span>${a.players.length} players</span><span>${a.completed.length} matches</span><span>${a.courtCount} courts</span>`;
-    card.innerHTML = `
-      <div class="archive-row">
-        <div style="flex:1;min-width:0">
-          <div class="archive-date">${fmtDate(a.date)}${manualBadge}</div>
-          <div class="archive-meta">
-            <span>Host: ${escapeHtml(a.host)}</span>
-            ${matchInfo}
-          </div>
-          <div style="font-size:11px;color:var(--ink-2);margin-top:6px"><strong style="color:var(--ink)">Standings:</strong> ${escapeHtml(top3) || "—"}</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
-          <button class="archive-del-btn" data-id="${a.id}" title="Delete (admin only)" aria-label="Delete archive">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h10M5 4V2.5h4V4M3.5 4l.5 8h6l.5-8M6 6.5v3.5M8 6.5v3.5"/></svg>
-          </button>
-          <div class="archive-arrow">→</div>
-        </div>
-      </div>
-    `;
-    card.onclick = (e)=>{
-      if(e.target.closest(".archive-del-btn")) return;
-      viewArchive(groupKey, a.id);
-    };
-    card.querySelector(".archive-del-btn").onclick = (e)=>{
-      e.stopPropagation();
-      promptAdminDelete(groupKey, a.id, fmtDate(a.date));
-    };
-    body.appendChild(card);
-  });
-}
-
-// ─── ADMIN-GATED ACTIONS (4-digit PIN) ───
-const ADMIN_CODE = "9909";
-let _adminOnSuccess = null;
-
-function promptAdminCode(opts){
-  // opts: { title, sub, icon ("default"|"danger"), onSuccess }
-  document.getElementById("admin-card-title").textContent = opts.title || "Admin code required";
-  document.getElementById("admin-modal-sub").textContent = opts.sub || "Enter the 4-digit admin code to continue.";
-  const iconWrap = document.getElementById("admin-icon-wrap");
-  iconWrap.classList.toggle("danger", opts.icon === "danger");
-  _adminOnSuccess = opts.onSuccess || null;
-  const inp = document.getElementById("admin-code-input");
-  inp.value = "";
-  renderPinCells("");
-  const hint = document.getElementById("pin-hint");
-  hint.textContent = "Enter 4 digits";
-  hint.classList.remove("error");
-  openModal("adminModal");
-  setTimeout(()=>inp.focus(), 80);
-}
-
-function renderPinCells(val){
-  const cells = document.querySelectorAll(".pin-cell");
-  cells.forEach((c,i)=>{
-    c.classList.toggle("filled", i < val.length);
-    c.classList.toggle("active", i === val.length);
-    c.classList.remove("error");
-  });
-}
-
-function flashPinError(msg){
-  const cells = document.querySelectorAll(".pin-cell");
-  cells.forEach(c=>c.classList.add("error"));
-  const hint = document.getElementById("pin-hint");
-  hint.textContent = msg || "Incorrect admin code.";
-  hint.classList.add("error");
-  const inp = document.getElementById("admin-code-input");
-  // Vibrate on supported devices
-  if(navigator.vibrate) navigator.vibrate([30,80,30]);
-  setTimeout(()=>{
-    cells.forEach(c=>c.classList.remove("error"));
-    inp.value = "";
-    renderPinCells("");
-    hint.textContent = "Enter 4 digits";
-    hint.classList.remove("error");
-    inp.focus();
-  }, 600);
-}
-
-function setupAdminPinInput(){
-  const inp = document.getElementById("admin-code-input");
-  // Tapping anywhere on the row should focus the input
-  document.getElementById("pin-row").addEventListener("click", ()=>inp.focus());
-  inp.addEventListener("input", ()=>{
-    // Strip any non-digit and limit to 4
-    let v = inp.value.replace(/\D/g, "").slice(0,4);
-    if(v !== inp.value) inp.value = v;
-    renderPinCells(v);
-    if(v.length === 4){
-      // Auto-submit
-      setTimeout(()=>{
-        if(v === ADMIN_CODE){
-          const cb = _adminOnSuccess;
-          _adminOnSuccess = null;
-          closeModal("adminModal");
-          if(cb) cb();
-        } else {
-          flashPinError("Incorrect admin code");
-        }
-      }, 100);
-    }
-  });
-  inp.addEventListener("keydown", e=>{
-    if(e.key === "Escape") closeModal("adminModal");
-  });
-}
-
-function promptAdminDelete(groupKey, archiveId, dateLabel){
-  promptAdminCode({
-    title:"Delete archive",
-    sub:`Enter the admin code to permanently delete the ${appState.groupNames[groupKey]} archive from ${dateLabel}. This cannot be undone.`,
-    icon:"danger",
-    onSuccess: ()=>{
-      appState.archives[groupKey] = appState.archives[groupKey].filter(x => x.id !== archiveId);
-      saveState();
-      renderHistory();
-    }
-  });
-}
-
-function viewArchive(groupKey, archiveId){
-  viewingArchive = { groupKey, archiveId };
-  sessionState = null;
-  document.getElementById("nav-logo").className = `nav-logo ${groupKey==="perf"?"perf":"jun"}`;
-  const a = appState.archives[groupKey].find(x=>x.id===archiveId);
-  if(!a) return;
-  document.getElementById("nav-sub").textContent = `${appState.groupNames[groupKey]} · ${fmtDate(a.date)} (Archive)`;
-  // Stay in history nav mode: only Home + History + Results visible
-  setHistoryNavMode(true);
-  document.getElementById("tab-results").classList.remove("hidden");
-  goScreen("results");
-}
-
-// ──────────────────────────────────────────────────────
-//  INIT
-// ──────────────────────────────────────────────────────
-const RULES_CONTENT = {
-  en:{
-    title:"Ladder Rules",
-    fabLabel:"Rules",
-    sections:[
-      {icon:"🏸",title:"Ladder Gameplay",rules:[
-        "Players are ranked 1 to N — Rank 1 is the top of the ladder.",
-        "Present players are assigned ladder positions in check-in order.",
-        "Absent or excused players are skipped during challenge routing.",
-        "The session ends when the host clicks End Session & View Results.",
-        "A player who is free and not in an active match cannot refuse or delay a valid incoming challenge simply to wait for another match to finish. If available, they are obligated to accept.",
-        "This mandatory acceptance rule applies when the incoming challenge is valid and the challenger holds a required ticket (if the ticket system is active). Ticket-less challenges do not carry mandatory priority.",
-      ]},
-      {icon:"⚔️",title:"Challenge System",rules:[
-        "A player may challenge the player ranked 1 or 2 spots above them.",
-        "Challenges are queued and assigned to an available court.",
-        "The higher-ranked player (defender) holds their rank until defeated.",
-        "If the challenger wins, they cascade upward — pushing defenders down one rank each.",
-        "If the challenger loses, they remain at their current rank.",
-      ]},
-      {icon:"🎟️",title:"Challenge Tickets",rules:[
-        "When tickets are active, only players holding a ticket may challenge.",
-        "Tickets transfer: the winner passes their ticket to the loser after a match.",
-        "If both players held tickets, the challenger's ticket is cancelled (−1 net).",
-        "Protected players cannot receive or use challenge tickets.",
-        "The host can grant or revoke tickets at any time using the admin code.",
-      ]},
-      {icon:"🛡️",title:"Protected Ranking",rules:[
-        "A player marked Protected during check-in keeps their rank but cannot be challenged from below.",
-        "Protected Rank 1 automatically shifts to Rank 2 for the session.",
-        "Other protected players remain at their existing roster position.",
-        "Challenges skip protected players when finding valid targets.",
-      ]},
-      {icon:"🏅",title:"Restoration Challenge",rules:[
-        "A player who was Rank 1 and marked Protected receives one restoration challenge in the next session they attend as Present.",
-        "The restoration challenge allows them to challenge the current Rank 1 — bypassing the normal 1–2 gap rule.",
-        "Winning reclaims Rank 1; losing keeps the current dropped rank.",
-        "The restoration right is one-time only and is cleared after use.",
-        "Hosts can manually grant or remove restoration rights using the admin code.",
-      ]},
-      {icon:"📋",title:"Match Results",rules:[
-        "Scores are entered by the host after each match concludes.",
-        "A walkover may be recorded if a player cannot complete the match.",
-        "The higher scorer in a walkover is declared the winner.",
-        "Deuce rules apply: at 20–20 (21pt) or 14–14 (15pt), win by 2 — capped at 30 or 20.",
-        "Golden point: the host may optionally declare a golden point to decide tied games.",
-      ]},
-      {icon:"⚙️",title:"Session Guidelines",rules:[
-        "All administrative actions (cancel match, grant ticket, restoration) require the 4-digit admin code.",
-        "Admin code session: valid for 5 minutes, except restoration grant which requires re-entry every time.",
-        "Court count can be adjusted during the session using +/– controls.",
-        "Matches may be manually cancelled by the host using the admin code.",
-      ]},
-    ]
-  },
-  zh:{
-    title:"天梯规则",
-    fabLabel:"规则",
-    sections:[
-      {icon:"🏸",title:"天梯玩法",rules:[
-        "球员排名从1到N，排名1为天梯顶部。",
-        "出席球员按签到顺序分配天梯位置。",
-        "缺席或请假球员在挑战路由时会被跳过。",
-        "当主持人点击《结束赛事并查看结果》时，本场赛事结束。",
-        "若球员当前处于空闲状态（未在进行中的比赛），不得以等待其他比赛结束为由拒绝或推迟有效的挑战邀请。一旦空闲，必须接受挑战。",
-        "此强制接受规则适用于：挑战有效，且（若票券系统激活）挑战方持有有效票券的情况。无票挑战不具有强制优先权。",
-      ]},
-      {icon:"⚔️",title:"挑战规则",rules:[
-        "球员可挑战排名高出自己1至2位的对手。",
-        "挑战按队列分配到空闲场地。",
-        "排名更高的防守方保持排名，直到被击败。",
-        "挑战者获胜后向上级联——将防守方各推低一位。",
-        "挑战者失败则维持当前排名。",
-      ]},
-      {icon:"🎟️",title:"挑战票规则",rules:[
-        "票券激活后，只有持票球员可发起挑战。",
-        "票券转移：赛后获胜方将票券传给失败方。",
-        "双方均持票时，挑战者票券被取消（净−1）。",
-        "受保护球员不能持有或使用挑战票。",
-        "主持人可随时使用管理员密码授予或撤销票券。",
-      ]},
-      {icon:"🛡️",title:"保护排名规则",rules:[
-        "签到时被标记为【受保护】的球员保持排名，但不能被下方球员挑战。",
-        "受保护的排名1自动移至本场排名2。",
-        "其他受保护球员保持其现有名单位置。",
-        "挑战目标查找时会跳过受保护球员。",
-      ]},
-      {icon:"🏅",title:"恢复挑战规则",rules:[
-        "曾为排名1并被标记保护的球员，在下次以【出席】状态参赛时获得一次恢复挑战机会。",
-        "恢复挑战允许挑战当前排名1，绕过正常的1-2位间距规则。",
-        "胜利则夺回排名1；失败则保持当前降位排名。",
-        "恢复资格一次性使用，用后清除。",
-        "主持人可使用管理员密码手动授予或撤销恢复资格。",
-      ]},
-      {icon:"📋",title:"比赛结果",rules:[
-        "每场比赛结束后由主持人录入比分。",
-        "如球员无法完成比赛，可记录弃权。",
-        "弃权情况下，得分较高者获胜。",
-        "平分规则：21分制在20-20时，15分制在14-14时，须多得2分获胜，上限分别为30和20。",
-        "黄金分：主持人可选择以黄金分决定平局比赛。",
-      ]},
-      {icon:"⚙️",title:"赛事指引",rules:[
-        "所有管理操作（取消比赛、授予票券、恢复挑战）均需4位管理员密码。",
-        "管理员密码有效期5分钟，但恢复挑战授予每次均需重新输入。",
-        "场地数量可在赛事进行中使用+/−控制调整。",
-        "主持人可使用管理员密码手动取消比赛。",
-      ]},
-    ]
-  }
-};
-
-function openRulesModal(){
-  const lang = currentLang === "zh" ? "zh" : "en";
-  const data = RULES_CONTENT[lang];
-  document.getElementById("rules-modal-title").textContent = data.title;
-  const body = document.getElementById("rules-modal-body");
-  body.innerHTML = data.sections.map(sec=>`
-    <div class="rules-section">
-      <div class="rules-section-title">${sec.icon} ${sec.title}</div>
-      <ul class="rules-list">
-        ${sec.rules.map(r=>`<li>${r}</li>`).join("")}
-      </ul>
-    </div>`).join("");
-  openModal("rulesModal");
-}
-function toggleCustomSelect(id){
-  // btn id: {id}-btn or {id}-select-btn; dropdown id: {id}-dropdown or {id}-select-dropdown
-  const btn = document.getElementById(id + "-btn") || document.getElementById(id + "-select-btn");
-  const drop = document.getElementById(id + "-dropdown") || document.getElementById(id + "-select-dropdown");
-  if(!btn || !drop) return;
-  const isOpen = drop.classList.contains("open");
-  // Close all other open dropdowns first
-  document.querySelectorAll(".custom-select-dropdown.open").forEach(d=>{
-    d.classList.remove("open");
-    const b = d.previousElementSibling;
-    if(b) b.classList.remove("open");
-  });
-  if(!isOpen){
-    drop.classList.add("open");
-    btn.classList.add("open");
-  }
-}
-
-function pickCustomSelect(id, value, label){
-  // The hidden input may have the same id as passed, or id + "-filter" (legacy)
-  const hiddenInput = document.getElementById(id) || document.getElementById(id + "-filter");
-  const labelEl = document.getElementById(id + "-label") || document.getElementById(id + "-select-label");
-  const btn = document.getElementById(id + "-btn") || document.getElementById(id + "-select-btn");
-  const drop = document.getElementById(id + "-dropdown") || document.getElementById(id + "-select-dropdown");
-  if(hiddenInput) hiddenInput.value = value;
-  if(labelEl){
-    labelEl.textContent = label;
-    labelEl.style.color = "";
-  }
-  if(btn) btn.classList.remove("open");
-  if(drop){
-    drop.classList.remove("open");
-    drop.querySelectorAll(".csel-opt").forEach(o=>{
-      o.classList.toggle("selected", o.dataset.value === value);
-    });
-  }
-  // Trigger render callbacks
-  if(id === "player-group") renderPlayersScreen();
-}
-
-function renderPlayersScreen(){
-  const query = (document.getElementById("player-search")?.value || "").toLowerCase().trim();
-  const groupFilter = document.getElementById("player-group-filter")?.value || "all";
-  const grid = document.getElementById("players-grid");
-  if(!grid) return;
-
-  // Gather all players from both rosters
-  let entries = [];
-  ["perf","jun"].forEach(gk=>{
-    if(groupFilter !== "all" && groupFilter !== gk) return;
-    appState.rosters[gk].forEach(p=>{
-      entries.push({ id:p.id, name:p.name, groupKey:gk, groupName:appState.groupNames[gk] });
-    });
-  });
-
-  // Filter by search
-  if(query) entries = entries.filter(e=>e.name.toLowerCase().includes(query));
-  entries.sort((a,b)=>a.name.localeCompare(b.name));
-
-  grid.innerHTML = "";
-  if(!entries.length){
-    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--ink-3)">No players found</div>`;
-    return;
-  }
-  entries.forEach(e=>{
-    const career = appState.careerHistory[e.id] || [];
-    const wins = career.filter(m=>m.won).length;
-    const losses = career.filter(m=>!m.won).length;
-    const total = wins + losses;
-    const wr = total > 0 ? Math.round(wins/total*100) : 0;
-    const initials = e.name.split(/\s+/).map(w=>w[0]).join("").toUpperCase().slice(0,2);
-    const card = document.createElement("div");
-    card.className = "player-card";
-    card.dataset.pid = e.id; // used by refreshPlayersGrid for targeted updates
-    card.innerHTML = `
-      <div class="pc-avatar ${e.groupKey==="jun"?"jun":""}">${initials}</div>
-      <div class="pc-name">${escapeHtml(e.name)}</div>
-      <div class="pc-group">${escapeHtml(e.groupName)}</div>
-      <div class="pc-stats">
-        <div class="pc-stat"><div class="pc-stat-n">${total}</div><div class="pc-stat-l">Played</div></div>
-        <div class="pc-stat"><div class="pc-stat-n">${wins}</div><div class="pc-stat-l">Wins</div></div>
-        <div class="pc-stat"><div class="pc-stat-n">${wr}%</div><div class="pc-stat-l">Rate</div></div>
-      </div>`;
-    card.addEventListener("click", ()=>openPlayerProfile(e.id));
-    grid.appendChild(card);
-  });
-}
-
-// ──────────────────────────────────────────────────────
-//  PLAYER PROFILE — SAFE EDIT SESSION
-// ──────────────────────────────────────────────────────
-let _ppmPid        = null;  // player ID currently displayed
-let _ppmEditMode   = false; // true = edit session active
-let _ppmEditBuffer = null;  // working copy (newest-first array with _pendingDelete flag)
-                            // null when not in edit mode
-// _ppmEditBuffer items: { ...matchRecord, _pendingDelete: bool }
-
-function openPlayerProfile(pid){
-  _ppmPid = pid;
-  _ppmEditMode = false;
-  _ppmEditBuffer = null;
-  _renderPlayerProfile();
-  openModal("playerProfileModal");
-}
-
-// Called by "Edit" button — requires admin, then starts a temporary edit session
-function toggleProfileEdit(){
-  if(!_ppmEditMode){
-    requireAdminThen({
-      title: "Edit player matches",
-      sub: "Enter the admin code to begin an editing session. No changes will be saved until you click Save.",
-      icon: "default"
-    }, ()=>{
-      // Build working buffer: newest first (mirrors display order), each item flagged
-      const career = appState.careerHistory[_ppmPid] || [];
-      _ppmEditBuffer = [...career].reverse().map(m=>({ ...m, _pendingDelete:false }));
-      _ppmEditMode = true;
-      _renderPlayerProfile();
-    });
-  } else {
-    // "Edit" clicked while already in edit mode — shouldn't happen (button is replaced), but safe
-    _commitProfileEdits();
-  }
-}
-
-// Save button: commit pending deletions permanently
-function _commitProfileEdits(){
-  const pid = _ppmPid;
-  if(!pid || !_ppmEditBuffer) return;
-
-  // Matches to permanently remove
-  const deletedItems = _ppmEditBuffer.filter(m=>m._pendingDelete);
-  // Kept matches — back to chronological order, no internal flags
-  const keptItems = _ppmEditBuffer.filter(m=>!m._pendingDelete).reverse().map(m=>{
-    const c = {...m}; delete c._pendingDelete; return c;
-  });
-
-  appState.careerHistory[pid] = keptItems;
-
-  // Remove paired opponent records for every deleted match
-  deletedItems.forEach(removed=>{
-    if(!removed.opponentId) return;
-    const oppCareer = appState.careerHistory[removed.opponentId] || [];
-    const oppIdx = oppCareer.findIndex(m=>
-      m.sessId        === removed.sessId &&
-      m.opponentId    === pid &&
-      m.myScore       === removed.theirScore &&
-      m.theirScore    === removed.myScore
-    );
-    if(oppIdx >= 0) oppCareer.splice(oppIdx, 1);
-    appState.careerHistory[removed.opponentId] = oppCareer;
-  });
-
-  saveState();
-  _ppmEditMode   = false;
-  _ppmEditBuffer = null;
-  _renderPlayerProfile();
-  refreshPlayersGrid();
-}
-
-// Cancel button: discard all pending changes — no save
-function _cancelProfileEdit(){
-  _ppmEditMode   = false;
-  _ppmEditBuffer = null;
-  _renderPlayerProfile(); // re-render from unchanged appState.careerHistory
-  // No saveState() — nothing was written
-}
-
-// Mark a buffered match for deletion (by its display-order index)
-function _ppmMarkDelete(bufIdx){
-  if(!_ppmEditBuffer || bufIdx < 0 || bufIdx >= _ppmEditBuffer.length) return;
-  _ppmEditBuffer[bufIdx]._pendingDelete = true;
-  _renderPlayerProfile();
-}
-
-// Undo a pending deletion
-function _ppmUndoDelete(bufIdx){
-  if(!_ppmEditBuffer || bufIdx < 0 || bufIdx >= _ppmEditBuffer.length) return;
-  _ppmEditBuffer[bufIdx]._pendingDelete = false;
-  _renderPlayerProfile();
-}
-
-// Re-render just the stat cells on all player cards
-function refreshPlayersGrid(){
-  const grid = document.getElementById("players-grid");
-  if(!grid) return;
-  grid.querySelectorAll(".player-card").forEach(card=>{
-    const pid = card.dataset.pid;
-    if(!pid) return;
-    const career = appState.careerHistory[pid] || [];
-    const wins   = career.filter(m=>m.won).length;
-    const total  = career.length;
-    const wr     = total > 0 ? Math.round(wins/total*100) : 0;
-    const stats  = card.querySelector(".pc-stats");
-    if(stats) stats.innerHTML = `
-      <div class="pc-stat"><div class="pc-stat-n">${total}</div><div class="pc-stat-l">Played</div></div>
-      <div class="pc-stat"><div class="pc-stat-n">${wins}</div><div class="pc-stat-l">Wins</div></div>
-      <div class="pc-stat"><div class="pc-stat-n">${wr}%</div><div class="pc-stat-l">Rate</div></div>`;
-  });
-}
-
-// Master render — called any time state changes
-function _renderPlayerProfile(){
-  const pid = _ppmPid;
-  if(!pid) return;
-
-  const groups = [];
-  ["perf","jun"].forEach(gk=>{
-    if(appState.rosters[gk].find(r=>r.id===pid)) groups.push({ gk, name:appState.groupNames[gk] });
-  });
-  if(!groups.length) return;
-  const firstGroup = groups[0];
-  const allRosters = [...appState.rosters.perf, ...appState.rosters.jun];
-  const p = allRosters.find(r=>r.id===pid);
-  if(!p) return;
-
-  // Decide which data to use for stats — buffer (excluding pending deletes) or live
-  const displayList = _ppmEditMode && _ppmEditBuffer
-    ? _ppmEditBuffer             // show buffer in display (newest first)
-    : [...(appState.careerHistory[pid]||[])].reverse(); // live, newest first
-
-  const activeMatches = _ppmEditMode
-    ? displayList.filter(m=>!m._pendingDelete)
-    : displayList;
-
-  const totalW = activeMatches.filter(m=>m.won).length;
-  const totalL = activeMatches.filter(m=>!m.won).length;
-  const total  = totalW + totalL;
-  const wr     = total > 0 ? Math.round(totalW/total*100) : 0;
-  const initials = p.name.split(/\s+/).map(w=>w[0]).join("").toUpperCase().slice(0,2);
-
-  // Header
-  document.getElementById("ppm-header").className = `ppm-header ${firstGroup.gk==="jun"?"jun":""}`;
-  const av = document.getElementById("ppm-avatar");
-  av.textContent = initials;
-  av.className = `ppm-avatar ${firstGroup.gk==="jun"?"jun":""}`;
-  document.getElementById("ppm-name").textContent = p.name;
-  document.getElementById("ppm-sub").textContent = groups.map(g=>g.name).join(" · ");
-
-  // Header action buttons — swap between normal (Edit + ✕) and edit-session (Save + Cancel)
-  const actionsEl = document.getElementById("ppm-header-actions");
-  if(actionsEl){
-    if(_ppmEditMode){
-      actionsEl.innerHTML = `
-        <div class="ppm-session-actions">
-          <button class="ppm-cancel-edit-btn" onclick="_cancelProfileEdit()" title="Undo all changes">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg>
-            Undo
-          </button>
-          <button class="ppm-save-btn" onclick="_commitProfileEdits()" title="Save all changes permanently">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Save
-          </button>
-        </div>`;
-    } else {
-      actionsEl.innerHTML = `
-        <div class="ppm-session-actions">
-          <button class="ppm-edit-btn" onclick="toggleProfileEdit()" title="Edit match history">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            Edit
-          </button>
-          <button class="ppm-close" onclick="closeModal('playerProfileModal')" title="Close">✕</button>
-        </div>`;
-    }
-  }
-
-  // Stats grid (live preview during editing)
-  document.getElementById("ppm-stats").innerHTML = `
-    <div class="ppm-stat"><div class="ppm-stat-n">${total}</div><div class="ppm-stat-l">Matches</div></div>
-    <div class="ppm-stat"><div class="ppm-stat-n">${totalW}</div><div class="ppm-stat-l">Wins</div></div>
-    <div class="ppm-stat"><div class="ppm-stat-n">${totalL}</div><div class="ppm-stat-l">Losses</div></div>
-    <div class="ppm-stat"><div class="ppm-stat-n">${wr}%</div><div class="ppm-stat-l">Win rate</div></div>`;
-
-  // Match list
-  const histEl = document.getElementById("ppm-history");
-  if(!displayList.length){
-    histEl.innerHTML = `<div class="ppm-no-data">No matches recorded yet</div>`;
-    return;
-  }
-
-  let html = "";
-  displayList.forEach((m, i)=>{
-    const date = m.date ? fmtDate(m.date) : "";
-    const wl   = m.won ? "pp-w" : "pp-l";
-    const isPending = !!m._pendingDelete;
-
-    if(_ppmEditMode){
-      const ctrl = isPending
-        ? `<button class="ppm-match-undo" data-idx="${i}" title="Undo removal">↩ Undo</button>`
-        : `<button class="ppm-match-del" data-idx="${i}" title="Mark for removal">
-             <svg width="7" height="7" viewBox="0 0 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-               <line x1="1" y1="1" x2="6" y2="6"/><line x1="6" y1="1" x2="1" y2="6"/>
-             </svg>
-           </button>`;
-      html += `<div class="ppm-match-row${isPending?" ppm-match-pending-del":""}" style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line)">
-        ${ctrl}
-        <span class="pp-result ${wl}">${m.won?"W":"L"}</span>
-        <div style="flex:1;min-width:0">
-          <div class="ppm-match-name" style="font-size:12px;font-weight:500">vs ${escapeHtml(m.opponent)}</div>
-          <div style="font-size:10px;color:var(--ink-3)">${escapeHtml(m.sessName||"")} · ${date}</div>
-        </div>
-        <div style="font-size:12px;font-weight:600;flex-shrink:0">${m.myScore}–${m.theirScore}</div>
-      </div>`;
-    } else {
-      html += `<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line)">
-        <span class="pp-result ${wl}">${m.won?"W":"L"}</span>
-        <div style="flex:1;min-width:0">
-          <div style="font-size:12px;font-weight:500">vs ${escapeHtml(m.opponent)}</div>
-          <div style="font-size:10px;color:var(--ink-3)">${escapeHtml(m.sessName||"")} · ${date}</div>
-        </div>
-        <div style="font-size:12px;font-weight:600;flex-shrink:0">${m.myScore}–${m.theirScore}</div>
-      </div>`;
-    }
-  });
-
-  histEl.innerHTML = html;
-
-  // Wire interactive buttons
-  histEl.querySelectorAll(".ppm-match-del").forEach(btn=>{
-    btn.addEventListener("click", ()=>_ppmMarkDelete(parseInt(btn.dataset.idx)));
-  });
-  histEl.querySelectorAll(".ppm-match-undo").forEach(btn=>{
-    btn.addEventListener("click", ()=>_ppmUndoDelete(parseInt(btn.dataset.idx)));
-  });
-}
-
-// ──────────────────────────────────────────────────────
-//  MANUAL ARCHIVE IMPORT
-// ──────────────────────────────────────────────────────
-let _maRankList = []; // array of {id, name, groupKey}
-let _maCheckedIds = new Set(); // player IDs checked in the checkbox list
-let _maDpTarget = false;
-
-function openManualArchiveModal(){
-  // Always gate the entire editor behind admin PIN first
-  requireAdminThen({
-    title: "Manual archive — admin required",
-    sub: "Enter the admin code to access the manual archive editor. This allows creating or importing historical ladder standings.",
-    icon: "default"
-  }, ()=>{
-    _maRankList = [];
-    _maCheckedIds = new Set();
-    document.getElementById("ma-date-display").textContent = "Pick a date…";
-    document.getElementById("ma-date-display").classList.add("placeholder");
-    document.getElementById("ma-notes").value = "";
-    // Reset group picker to perf
-    document.getElementById("ma-group").value = "perf";
-    const gLbl = document.getElementById("ma-group-label");
-    if(gLbl) gLbl.textContent = "Performance";
-    document.querySelectorAll("#ma-group-dropdown .csel-opt").forEach(o=>{
-      o.classList.toggle("selected", o.dataset.value === "perf");
-    });
-    // Always start at tab 1
-    maSwitchTab("select");
-    maRenderPlayerList();
-    openModal("manualArchiveModal");
-  });
-}
-
-// ── Manual archive checkbox list state ──
-// (_maCheckedIds declared earlier near _maRankList)
-
-function maResetPlayerList(){
-  _maCheckedIds = new Set();
-  _maRankList = [];
-  maSwitchTab("select");
-  maRenderPlayerList();
-}
-
-function maSwitchTab(tab){
-  const selectPanel = document.getElementById("ma-panel-select");
-  const orderPanel  = document.getElementById("ma-panel-order");
-  const tabSelect   = document.getElementById("ma-tab-select");
-  const tabOrder    = document.getElementById("ma-tab-order");
-  if(!selectPanel || !orderPanel) return;
-  if(tab === "select"){
-    selectPanel.classList.remove("hidden");
-    orderPanel.classList.add("hidden");
-    tabSelect.classList.add("active");
-    tabOrder.classList.remove("active");
-  } else {
-    // Build _maRankList from checked IDs, preserving existing order then appending new
-    const gk = document.getElementById("ma-group")?.value || "perf";
-    const roster = appState.rosters[gk];
-    // Keep existing ranked order, but add any newly checked ones
-    const existingIds = new Set(_maRankList.map(r=>r.id));
-    // Remove unchecked from _maRankList
-    _maRankList = _maRankList.filter(r=>_maCheckedIds.has(r.id));
-    // Add newly checked ones at the end
-    roster.forEach(p=>{
-      if(_maCheckedIds.has(p.id) && !_maRankList.find(r=>r.id===p.id)){
-        _maRankList.push({id:p.id, name:p.name, groupKey:gk});
-      }
-    });
-    selectPanel.classList.add("hidden");
-    orderPanel.classList.remove("hidden");
-    tabSelect.classList.remove("active");
-    tabOrder.classList.add("active");
-    maRenderRankedList();
-  }
-}
-
-function maToggleAll(){
-  const gk = document.getElementById("ma-group")?.value || "perf";
-  const allIds = appState.rosters[gk].map(p=>p.id);
-  const allChecked = allIds.every(id=>_maCheckedIds.has(id));
-  if(allChecked) _maCheckedIds = new Set();
-  else allIds.forEach(id=>_maCheckedIds.add(id));
-  maRenderPlayerList();
-}
-
-function maRenderPlayerList(){
-  const el = document.getElementById("ma-player-list");
-  if(!el) return;
-  const gk = document.getElementById("ma-group")?.value || "perf";
-  const roster = appState.rosters[gk];
-  el.innerHTML = "";
-  roster.forEach(p=>{
-    const checked = _maCheckedIds.has(p.id);
-    const row = document.createElement("div");
-    row.className = `ma-player-item${checked?" checked":""}`;
-    row.dataset.pid = p.id;
-    row.innerHTML = `
-      <div class="ma-cb">
-        <svg class="ma-cb-check" viewBox="0 0 12 10"><polyline points="1,5 4.5,9 11,1"/></svg>
-      </div>
-      <span class="ma-player-name">${escapeHtml(p.name)}</span>`;
-    row.addEventListener("click", ()=>{
-      if(_maCheckedIds.has(p.id)) _maCheckedIds.delete(p.id);
-      else _maCheckedIds.add(p.id);
-      row.classList.toggle("checked", _maCheckedIds.has(p.id));
-      const cb = row.querySelector(".ma-cb-check");
-      if(cb){ cb.style.opacity = _maCheckedIds.has(p.id) ? "1" : "0"; cb.style.transform = _maCheckedIds.has(p.id) ? "scale(1)" : "scale(.6)"; }
-    });
-    el.appendChild(row);
-  });
-}
-
-// ── Drag-to-reorder ranked list ──
-let _maDragIdx = null;
-let _maDragGhost = null;
-let _maDragOriginTop = 0;
-let _maDragOriginLeft = 0;
-let _maDragStartY = 0;
-let _maDragPointerId = null;
-
-function maRenderRankedList(){
-  const el = document.getElementById("ma-ranked-list");
-  if(!el) return;
-  el.innerHTML = "";
-  if(!_maRankList.length){
-    el.innerHTML = `<div style="padding:18px;text-align:center;font-size:12px;color:var(--ink-3)">No players selected — go back to select players.</div>`;
-    return;
-  }
-  _maRankList.forEach((p, i)=>{
-    const row = document.createElement("div");
-    row.className = "ma-ranked-item";
-    row.dataset.idx = i;
-    row.innerHTML = `
-      <div class="ma-rank-num">${i+1}</div>
-      <span class="ma-rank-name">${escapeHtml(p.name)}</span>
-      <div class="ma-drag-handle" title="Drag to reorder">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
-          <circle cx="4" cy="3.5" r="1.2"/><circle cx="10" cy="3.5" r="1.2"/>
-          <circle cx="4" cy="7" r="1.2"/><circle cx="10" cy="7" r="1.2"/>
-          <circle cx="4" cy="10.5" r="1.2"/><circle cx="10" cy="10.5" r="1.2"/>
-        </svg>
-      </div>`;
-    // Attach drag via pointer events on the handle
-    const handle = row.querySelector(".ma-drag-handle");
-    handle.addEventListener("pointerdown", e=>maStartDrag(e, i));
-    el.appendChild(row);
-  });
-}
-
-function maStartDrag(e, idx){
-  e.preventDefault();
-  const el = document.getElementById("ma-ranked-list");
-  const rows = el.querySelectorAll(".ma-ranked-item");
-  if(!rows[idx]) return;
-  _maDragIdx = idx;
-  _maDragPointerId = e.pointerId;
-  _maDragStartY = e.clientY;
-  const r = rows[idx].getBoundingClientRect();
-  _maDragOriginTop = r.top;
-  _maDragOriginLeft = r.left;
-  // Create ghost
-  _maDragGhost = rows[idx].cloneNode(true);
-  _maDragGhost.className = "ma-ranked-item ma-ghost";
-  _maDragGhost.style.left = r.left + "px";
-  _maDragGhost.style.top  = r.top  + "px";
-  _maDragGhost.style.width = r.width + "px";
-  document.body.appendChild(_maDragGhost);
-  rows[idx].style.opacity = ".35";
-  try{ e.target.closest(".ma-drag-handle").setPointerCapture(e.pointerId); }catch(_){}
-  document.addEventListener("pointermove", maDragMove, {passive:false});
-  document.addEventListener("pointerup",   maDragEnd);
-  document.addEventListener("pointercancel", maDragEnd);
-}
-
-function maDragMove(e){
-  if(e.pointerId !== _maDragPointerId) return;
-  e.preventDefault();
-  const dy = e.clientY - _maDragStartY;
-  if(_maDragGhost) _maDragGhost.style.top = (_maDragOriginTop + dy) + "px";
-  // Find which row we're hovering over
-  const el = document.getElementById("ma-ranked-list");
-  const rows = [...el.querySelectorAll(".ma-ranked-item")];
-  rows.forEach(r=>r.classList.remove("dragging-over"));
-  const over = rows.find(r=>{
-    const rb = r.getBoundingClientRect();
-    return e.clientY >= rb.top && e.clientY < rb.bottom;
-  });
-  if(over){
-    const overIdx = parseInt(over.dataset.idx);
-    if(overIdx !== _maDragIdx) over.classList.add("dragging-over");
-  }
-}
-
-function maDragEnd(e){
-  document.removeEventListener("pointermove", maDragMove);
-  document.removeEventListener("pointerup",   maDragEnd);
-  document.removeEventListener("pointercancel", maDragEnd);
-  if(_maDragGhost){ _maDragGhost.remove(); _maDragGhost = null; }
-  const el = document.getElementById("ma-ranked-list");
-  if(!el){ _maDragIdx = null; return; }
-  const rows = [...el.querySelectorAll(".ma-ranked-item")];
-  // Find drop target
-  const over = rows.find(r=>r.classList.contains("dragging-over"));
-  if(over && _maDragIdx !== null){
-    const toIdx = parseInt(over.dataset.idx);
-    if(toIdx !== _maDragIdx){
-      const item = _maRankList.splice(_maDragIdx, 1)[0];
-      _maRankList.splice(toIdx, 0, item);
-    }
-  }
-  _maDragIdx = null;
-  maRenderRankedList();
-}
-
-// Keep old stubs so saveManualArchive still works
-function maRefreshPlayerSelect(){ maRenderPlayerList(); }
-function renderManualRankList(){ maRenderRankedList(); }
-function maAddPlayer(){}
-function maRemovePlayer(idx){ _maRankList.splice(idx,1); maRenderRankedList(); }
-function maMovePlayer(idx, dir){
-  const ni = idx + dir;
-  if(ni<0||ni>=_maRankList.length) return;
-  const t=_maRankList[idx]; _maRankList[idx]=_maRankList[ni]; _maRankList[ni]=t;
-  maRenderRankedList();
-}
-
-function openManualArchiveDatePicker(){
-  _maDpTarget = true;
-  dpTargetInputId = "ma-date";
-  dpTargetDisplayId = "ma-date-display";
-  const current = document.getElementById("ma-date").value || todayISO();
-  const [y,m,d] = current.split("-").map(Number);
-  dpYear = y; dpMonth = m-1;
-  dpSelectedISO = current;
-  document.getElementById("dp-month-view").classList.remove("hidden");
-  document.getElementById("dp-year-view").classList.add("hidden");
-  renderDatePicker();
-  openModal("datePickerModal");
-  document.addEventListener("keydown", dpKeydown);
-}
-
-// (ma-group change is handled by pickCustomSelect onclick handlers)
-
-function saveManualArchive(){
-  const gk = document.getElementById("ma-group")?.value || "perf";
-  const date = document.getElementById("ma-date")?.value;
-  const notes = document.getElementById("ma-notes")?.value.trim();
-  if(!date){ alert("Please pick a session date."); return; }
-  if(_maRankList.length < 2){ alert("Add at least 2 players to the standings."); return; }
-  requireAdminThen({
-    title:"Save manual archive",
-    sub:`This will add a manually imported archive for ${appState.groupNames[gk]} on ${fmtDate(date)}. Admin approval required.`,
-    icon:"default"
-  }, ()=>{
-    const archiveId = `${gk}_manual_${cryptoRand()}`;
-    const players = _maRankList.map((p, i)=>({
-      id:p.id, name:p.name, rank:i+1, wins:0, losses:0, status:"available", lockedAgainst:[]
-    }));
-    const archive = {
-      id:archiveId, groupKey:gk, groupName:appState.groupNames[gk],
-      date, host:sessionHost||"Manual import",
-      endedAt:new Date().toISOString(),
-      courtCount:0, players, courts:[], completed:[], sessionHistory:{},
-      isManual:true, notes:notes||null
-    };
-    appState.archives[gk].unshift(archive);
-    // Update roster order to reflect these standings
-    const usedIds = new Set(players.map(p=>p.id));
-    const nonParticipants = appState.rosters[gk].filter(r=>!usedIds.has(r.id));
-    appState.rosters[gk] = [
-      ...players.map(sp=>{ const ex = appState.rosters[gk].find(r=>r.id===sp.id); return {...(ex||{}), id:sp.id, name:sp.name}; }),
-      ...nonParticipants
-    ];
-    saveState();
-    closeModal("manualArchiveModal");
-    renderHistory();
-  });
-}
-
-window.addEventListener("beforeunload", saveState);
-
-// ──────────────────────────────────────────────────────
-//  PWA BOOTSTRAP (service worker, install hint, theme color)
-// ──────────────────────────────────────────────────────
-
-// 1. Service worker registration — gives us offline support after first load.
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js")
-      .then(reg => {
-        // Auto-check for an updated worker every time the user reopens the app.
-        reg.update().catch(()=>{});
-        // If a new SW becomes available while the page is open, swap it in.
-        reg.addEventListener("updatefound", () => {
-          const sw = reg.installing;
-          if (!sw) return;
-          sw.addEventListener("statechange", () => {
-            if (sw.state === "installed" && navigator.serviceWorker.controller) {
-              // New version is waiting. Activate it on next reload — silent for the user.
-              sw.postMessage && sw.postMessage("SKIP_WAITING");
-            }
-          });
-        });
-      })
-      .catch(err => console.warn("SW registration failed:", err));
-  });
-}
-
-// 2. iOS install hint — shown once, in Safari, before the app is on the Home Screen.
-function maybeShowInstallHint(){
-  try{
-    const ua = navigator.userAgent || "";
-    const isIOS = /iPad|iPhone|iPod/.test(ua) ||
-                  (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1); // iPad on iPadOS 13+
-    if(!isIOS) return;
-    // Already installed / running standalone?
-    const standalone = window.navigator.standalone === true ||
-                       window.matchMedia("(display-mode: standalone)").matches;
-    if(standalone) return;
-    if(localStorage.getItem("badminton_install_hint_dismissed") === "1") return;
-    setTimeout(()=>{
-      const hint = document.getElementById("install-hint");
-      if(hint) hint.classList.add("show");
-    }, 1200);
-  }catch(_){}
-}
-document.addEventListener("DOMContentLoaded", ()=>{
-  maybeShowInstallHint();
-  const dismiss = document.getElementById("ih-dismiss-btn");
-  if(dismiss){
-    dismiss.addEventListener("click", ()=>{
-      document.getElementById("install-hint").classList.remove("show");
-      try { localStorage.setItem("badminton_install_hint_dismissed", "1"); } catch(_){}
-    });
-  }
-});
-
-// 3. Dynamic theme color: green during a Performance session, blue for Junior Advance,
-//    and the default green outside of a session. This colors the iOS status bar / Android
-//    address bar to match what's on screen.
-function setThemeColor(hex){
-  const m = document.getElementById("theme-color-meta");
-  if(m) m.setAttribute("content", hex);
-}
-// Wrap startGroupSession & openHistory so theme colour follows the active group.
-(function(){
-  const _start = window.startGroupSession;
-  window.startGroupSession = function(groupKey){
-    setThemeColor(groupKey === "jun" ? "#3F51C1" : "#0F6E56");
-    return _start(groupKey);
-  };
-  const _hist = window.openHistory;
-  window.openHistory = function(groupKey){
-    setThemeColor(groupKey === "jun" ? "#3F51C1" : "#0F6E56");
-    return _hist(groupKey);
-  };
-  const _exit = window.exitToHome;
-  window.exitToHome = function(){
-    setThemeColor("#0F6E56");
-    return _exit();
-  };
-})();
-</script>
-</body>
-</html>
+    const preview
